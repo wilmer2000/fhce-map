@@ -47,6 +47,10 @@ module.exports = tseslint.config(
       '@typescript-eslint/naming-convention': [
         'error',
         {
+          selector: 'import',
+          format: null,
+        },
+        {
           selector: 'default',
           format: ['camelCase'],
           leadingUnderscore: 'allow',
