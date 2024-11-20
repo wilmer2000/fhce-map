@@ -1,5 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { Component } from '@angular/core';
 
 import { MapComponent } from '../map/map.component';
 
@@ -10,13 +9,4 @@ import { MapComponent } from '../map/map.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
-  csv: any;
-  private readonly route = inject(ActivatedRoute);
-
-  ngOnInit(): void {
-    this.route.data.subscribe((data: Data) => {
-      this.csv = data.csvData;
-    });
-  }
-}
+export class HomeComponent {}

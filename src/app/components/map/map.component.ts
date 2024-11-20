@@ -1,21 +1,30 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { Map } from 'leaflet';
+
+import { IGeoJson } from '../../interfaces/building.interface';
+import { BuildingService } from '../../services/building.service';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [],
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
 })
-export class MapComponent implements AfterViewInit {
-  @Input() csv: any;
+export class MapComponent implements AfterViewInit, OnInit {
+  buildingsGeoJson: IGeoJson | undefined;
+  private readonly buildingService = inject(BuildingService);
   private map: Map;
+
+  ngOnInit(): void {
+    this.buildingService.geoJson.subscribe((geoJson: IGeoJson | undefined) => {
+      this.buildingsGeoJson = geoJson;
+      this.loadMarks();
+    });
+  }
 
   ngAfterViewInit(): void {
     this.initMap();
-    console.log(this.csv);
   }
 
   private initMap(): void {
@@ -31,6 +40,12 @@ export class MapComponent implements AfterViewInit {
     });
 
     tiles.addTo(this.map);
-    L.marker([50.5, 30.5]).addTo(this.map);
+  }
+
+  private loadMarks(): void {
+    if (this.buildingsGeoJson) {
+      console.log(this.buildingsGeoJson);
+      L.geoJSON(this.buildingsGeoJson, {}).addTo(this.map);
+    }
   }
 }
