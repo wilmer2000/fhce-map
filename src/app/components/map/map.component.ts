@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { Map } from 'leaflet';
+import { LeafletMouseEvent, Map } from 'leaflet';
 
 import { IGeoJson } from '../../interfaces/building.interface';
 import { BuildingService } from '../../services/building.service';
@@ -29,8 +29,8 @@ export class MapComponent implements AfterViewInit, OnInit {
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [-32.5583168, -55.811697],
-      zoom: 7,
+      center: [-34.9055, -56.1851],
+      zoom: 13,
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -44,8 +44,11 @@ export class MapComponent implements AfterViewInit, OnInit {
 
   private loadMarks(): void {
     if (this.buildingsGeoJson) {
-      console.log(this.buildingsGeoJson);
-      L.geoJSON(this.buildingsGeoJson, {}).addTo(this.map);
+      L.geoJSON(this.buildingsGeoJson, {})
+        .on('click', (buildSelected: LeafletMouseEvent) => {
+          console.log(buildSelected);
+        })
+        .addTo(this.map);
     }
   }
 }
