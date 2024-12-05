@@ -22,7 +22,7 @@ export interface IGeoJsonGeometry {
   coordinates: [number, number];
 }
 
-export type IGeoJsonProperties = Record<string, any>
+export type IGeoJsonProperties = Record<string, any>;
 
 export interface IGeoJsonFeature {
   type: TGeoJsonType;
@@ -36,5 +36,7 @@ export interface IGeoJson {
   metadata: Record<string, any>;
 }
 
-
-export interface IYearsLimit { startYear: number; endYear: number }
+export interface IYearsLimit {
+  startYear: number;
+  endYear: number;
+}

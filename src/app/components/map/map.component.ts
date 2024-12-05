@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { LeafletMouseEvent, Map } from 'leaflet';
-import { BuildingService } from '../../services/building.service';
-import { IGeoJson } from '../../interfaces/building.interface';
-import { toObservable } from '@angular/core/rxjs-interop';
 import { Subscription } from 'rxjs';
+
+import { IGeoJson } from '../../interfaces/building.interface';
+import { BuildingService } from '../../services/building.service';
 
 @Component({
   selector: 'app-map',
@@ -64,6 +64,4 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
       })
       .addTo(this.map);
   }
-
-
 }

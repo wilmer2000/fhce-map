@@ -2,22 +2,22 @@
   <div class="timer-range-content">
     <div class="input-range">
       <input
-        type="range"
-        id="year-selected"
-        name="year-selected"
-        [min]="yearsLimits.startYear"
-        [max]="yearsLimits.endYear"
-        [step]="step"
         (change)="onYearChange($event)"
+        [max]="yearsLimits.endYear"
+        [min]="yearsLimits.startYear"
+        [step]="step"
+        id="year-selected"
         list="mark-years"
+        name="year-selected"
+        type="range"
       />
-      <datalist id="mark-years" class="mark-years">
-        <option value="0" label="3"></option>
-        <option value="0" label="3"></option>
-        <option value="0" label="3"></option>
-        <option value="0" label="3"></option>
-        <option value="0" label="3"></option>
-        <option value="0" label="3"></option>
+      <datalist class="mark-years" id="mark-years">
+        <option label="3" value="0"></option>
+        <option label="3" value="0"></option>
+        <option label="3" value="0"></option>
+        <option label="3" value="0"></option>
+        <option label="3" value="0"></option>
+        <option label="3" value="0"></option>
       </datalist>
     </div>
   </div>
