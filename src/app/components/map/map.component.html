@@ -11,14 +11,13 @@
         name="year-selected"
         type="range"
       />
-      <datalist class="mark-years" id="mark-years">
-        <option label="3" value="0"></option>
-        <option label="3" value="0"></option>
-        <option label="3" value="0"></option>
-        <option label="3" value="0"></option>
-        <option label="3" value="0"></option>
-        <option label="3" value="0"></option>
-      </datalist>
+      @if (steps) {
+        <datalist class="mark-years" id="mark-years">
+          @for (step of steps; track step) {
+            <option [label]="step" [value]="step">{{ step }}</option>
+          }
+        </datalist>
+      }
     </div>
   </div>
   <div class="map-container">

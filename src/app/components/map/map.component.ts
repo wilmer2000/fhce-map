@@ -3,7 +3,7 @@ import * as L from 'leaflet';
 import { LeafletMouseEvent, Map } from 'leaflet';
 import { Subscription } from 'rxjs';
 
-import { IGeoJson } from '../../interfaces/building.interface';
+import { IGeoJson, IYearsLimit } from '../../interfaces/building.interface';
 import { BuildingService } from '../../services/building.service';
 
 @Component({
@@ -24,6 +24,21 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
     this.subscriptions.push(
       this.buildingService.buildings$.subscribe((buildings: IGeoJson) => {
         if (this.map) this.loadMarks(buildings);
+      }),
+    );
+    this.subscriptions.push(
+      this.buildingService.steps$.subscribe((steps: number[]) => {
+        if (steps) this.steps = steps;
+      }),
+    );
+    this.subscriptions.push(
+      this.buildingService.step$.subscribe((step: number) => {
+        if (step) this.step = step;
+      }),
+    );
+    this.subscriptions.push(
+      this.buildingService.yearsLimits$.subscribe((yearsLimits: IYearsLimit) => {
+        if (yearsLimits) this.yearsLimits = yearsLimits;
       }),
     );
   }
