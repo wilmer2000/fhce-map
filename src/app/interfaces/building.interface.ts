@@ -40,3 +40,10 @@ export interface IYearsLimit {
   startYear: number;
   endYear: number;
 }
+
+export enum EMapIcon {
+  Public = 'PRIVATE',
+  Private = 'PUBLIC',
+  Associative = 'ASSOCIATIVE',
+  Independent = 'INDEPENDENT',
+}

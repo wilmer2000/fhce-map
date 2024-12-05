@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
 
-import { IBuilding, IGeoJson, IGeoJsonFeature, IYearsLimit } from '../interfaces/building.interface';
+import { EMapIcon, IBuilding, IGeoJson, IGeoJsonFeature, IYearsLimit } from '../interfaces/building.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -42,6 +42,7 @@ export class BuildingService {
         this._buildingJsonBackup = this.parseCsvToJson(csvString);
 
         const buildings: IGeoJson = this.getGeoJson(this._buildingJsonBackup);
+        console.log(buildings);
         this.setYearsLimits(buildings.metadata.startYear, buildings.metadata.endYear);
         this._buildings.next(buildings);
       });
@@ -85,6 +86,7 @@ export class BuildingService {
           address: building.address,
           openYear: building.openYear,
           closeYear: Number(building.closeYear) ? Number(building.closeYear) : currentYear,
+          mapIconColor: this.setMarkerColor(building.type as EMapIcon),
         },
       };
     });
@@ -119,5 +121,20 @@ export class BuildingService {
     }
 
     this._steps.next(step);
+  }
+
+  private setMarkerColor(mapIcon: EMapIcon): string {
+    switch (mapIcon) {
+      case EMapIcon.Public:
+        return '#0000FF';
+      case EMapIcon.Associative:
+        return '#ff00fb';
+      case EMapIcon.Private:
+        return '#09eca9';
+      case EMapIcon.Independent:
+        return '#ffa600';
+      default:
+        return '#ff0000';
+    }
   }
 }
