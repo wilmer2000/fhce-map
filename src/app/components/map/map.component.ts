@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import * as geojson from 'geojson';
 import * as L from 'leaflet';
 import { GeoJSON, LatLng, Layer, LeafletMouseEvent, Map } from 'leaflet';
 import { Subscription } from 'rxjs';
 
 import { IGeoJson, IYearsLimit } from '../../interfaces/building.interface';
 import { BuildingService } from '../../services/building.service';
-import * as geojson from 'geojson';
 
 @Component({
   selector: 'app-map',
@@ -84,15 +84,15 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
         return new L.CircleMarker(latlng, {
           radius: 5,
           fillOpacity: 1,
-          color: geoJsonPoint.properties.mapIconColor
+          color: geoJsonPoint.properties.mapIconColor,
         });
       },
     });
 
     this.featureGroup
-    .on('click', (buildSelected: LeafletMouseEvent) => {
-      console.log(buildSelected);
-    })
-    .addTo(this.map);
+      .on('click', (buildSelected: LeafletMouseEvent) => {
+        console.log(buildSelected);
+      })
+      .addTo(this.map);
   }
 }
