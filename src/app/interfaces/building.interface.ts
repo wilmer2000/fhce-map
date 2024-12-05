@@ -33,5 +33,6 @@ export interface IGeoJsonFeature {
 export interface IGeoJson {
   type: TGeoJsonType;
   features: IGeoJsonFeature[];
+  metadata: Record<string, any>;
 }
 

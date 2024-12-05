@@ -1,5 +1,29 @@
-<div class="map-container">
-  <div class="map-frame">
-    <div id="map"></div>
+<div class="container">
+  <div class="timer-range-content">
+    <div class="input-range">
+      <input
+        type="range"
+        id="year-selected"
+        name="year-selected"
+        [min]="yearsLimits.startYear"
+        [max]="yearsLimits.endYear"
+        [step]="step"
+        (change)="onYearChange($event)"
+        list="mark-years"
+      />
+      <datalist id="mark-years" class="mark-years">
+        <option value="0" label="3"></option>
+        <option value="0" label="3"></option>
+        <option value="0" label="3"></option>
+        <option value="0" label="3"></option>
+        <option value="0" label="3"></option>
+        <option value="0" label="3"></option>
+      </datalist>
+    </div>
+  </div>
+  <div class="map-container">
+    <div class="map-frame">
+      <div id="map"></div>
+    </div>
   </div>
 </div>
