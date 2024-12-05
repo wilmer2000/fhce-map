@@ -31,6 +31,7 @@ export class BuildingService {
     const filteredBuildings: IBuilding[] = this._buildingJsonBackup.filter((building: IBuilding) => {
       return +building.openYear <= year && +building.closeYear >= year;
     });
+    console.log(filteredBuildings);
     this._buildings.next(this.getGeoJson(filteredBuildings));
   }
 
@@ -40,9 +41,7 @@ export class BuildingService {
       .pipe(take(1))
       .subscribe((csvString: string) => {
         this._buildingJsonBackup = this.parseCsvToJson(csvString);
-
         const buildings: IGeoJson = this.getGeoJson(this._buildingJsonBackup);
-        console.log(buildings);
         this.setYearsLimits(buildings.metadata.startYear, buildings.metadata.endYear);
         this._buildings.next(buildings);
       });
@@ -59,12 +58,12 @@ export class BuildingService {
       if (currentLine.some((item) => item === '')) continue;
 
       buildings.push({
-        name: currentLine[0],
-        address: currentLine[1],
-        coords: currentLine[2],
-        openYear: currentLine[3],
-        closeYear: currentLine[4],
-        type: currentLine[5],
+        name: currentLine[0].trim(),
+        address: currentLine[1].trim(),
+        coords: currentLine[2].trim(),
+        openYear: currentLine[3].trim(),
+        closeYear: currentLine[4].trim(),
+        type: currentLine[5].trim(),
       });
     }
 
@@ -84,8 +83,8 @@ export class BuildingService {
         properties: {
           name: building.name,
           address: building.address,
-          openYear: building.openYear,
-          closeYear: Number(building.closeYear) ? Number(building.closeYear) : currentYear,
+          openYear: +building.openYear,
+          closeYear: +building.closeYear || currentYear,
           mapIconColor: this.setMarkerColor(building.type as EMapIcon),
         },
       };

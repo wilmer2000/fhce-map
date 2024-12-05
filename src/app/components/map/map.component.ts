@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { LatLng, Layer, LeafletMouseEvent, Map } from 'leaflet';
+import { GeoJSON, LatLng, Layer, LeafletMouseEvent, Map } from 'leaflet';
 import { Subscription } from 'rxjs';
 
 import { IGeoJson, IYearsLimit } from '../../interfaces/building.interface';
@@ -20,6 +20,7 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   private map: Map;
   private readonly buildingService = inject(BuildingService);
   private subscriptions: Subscription[] = [];
+  private featureGroup: GeoJSON;
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -74,11 +75,11 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   private loadMarks(buildings: IGeoJson): void {
-    // const featureGroup = L.featureGroup().addTo(this.map);
-    // featureGroup.clearLayers();
-    // marker = new L.marker([lat, lng]).addTo(fg)
+    if (this.featureGroup) {
+      this.featureGroup.clearLayers();
+    }
 
-    L.geoJSON(buildings, {
+    this.featureGroup = L.geoJSON(buildings, {
       pointToLayer(geoJsonPoint: geojson.Feature<geojson.Point, any>, latlng: LatLng): Layer {
         return new L.CircleMarker(latlng, {
           radius: 5,
@@ -86,10 +87,12 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
           color: geoJsonPoint.properties.mapIconColor
         });
       },
+    });
+
+    this.featureGroup
+    .on('click', (buildSelected: LeafletMouseEvent) => {
+      console.log(buildSelected);
     })
-      .on('click', (buildSelected: LeafletMouseEvent) => {
-        console.log(buildSelected);
-      })
-      .addTo(this.map);
+    .addTo(this.map);
   }
 }

@@ -41,41 +41,52 @@
     background-color: aliceblue;
     max-width: 800px;
     width: 100%;
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
   }
 
   .mark-years {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 16.349px;
 
     option {
       display: inline-block;
+      font-size: 0.8rem;
+      width: 30px;
+      padding: 0;
     }
   }
 }
 
 /*********** Baseline, reset styles ***********/
-input[type='range'] {
+.input-range-selector {
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
   cursor: pointer;
-  width: 25rem;
+  width: 100%;
+  margin-bottom: 5px;
 }
 
 /* Removes default focus */
-input[type='range']:focus {
+.input-range-selector:focus {
   outline: none;
 }
 
 /******** Chrome, Safari, Opera and Edge Chromium styles ********/
 /* slider track */
-input[type='range']::-webkit-slider-runnable-track {
+.input-range-selector::-webkit-slider-runnable-track {
   background-color: #add8e6;
   border-radius: 0.5rem;
   height: 0.5rem;
 }
 
 /* slider thumb */
-input[type='range']::-webkit-slider-thumb {
+.input-range-selector::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
   margin-top: -4px; /* Centers thumb on the track */
@@ -85,21 +96,21 @@ input[type='range']::-webkit-slider-thumb {
   width: 1rem;
 }
 
-input[type='range']:focus::-webkit-slider-thumb {
+.input-range-selector:focus::-webkit-slider-thumb {
   outline: 3px solid #808080;
   outline-offset: 0.125rem;
 }
 
 /*********** Firefox styles ***********/
 /* slider track */
-input[type='range']::-moz-range-track {
+.input-range-selector::-moz-range-track {
   background-color: #add8e6;
   border-radius: 0.5rem;
   height: 0.5rem;
 }
 
 /* slider thumb */
-input[type='range']::-moz-range-thumb {
+.input-range-selector::-moz-range-thumb {
   background-color: #808080;
   border: none; /*Removes extra border that FF applies*/
   border-radius: 0.5rem;
@@ -107,7 +118,7 @@ input[type='range']::-moz-range-thumb {
   width: 1rem;
 }
 
-input[type='range']:focus::-moz-range-thumb {
+.input-range-selector:focus::-moz-range-thumb {
   outline: 3px solid #808080;
   outline-offset: 0.125rem;
 }
