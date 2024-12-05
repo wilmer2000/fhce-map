@@ -36,3 +36,5 @@ export interface IGeoJson {
   metadata: Record<string, any>;
 }
 
+
+export interface IYearsLimit { startYear: number; endYear: number }
