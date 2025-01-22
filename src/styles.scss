@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-* {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
+//@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit&display=swap');
+//
+//* {
+//  font-family: "Outfit", sans-serif;
+//  font-optical-sizing: auto;
+//  font-weight: 400;
+//  font-style: normal;
+//}

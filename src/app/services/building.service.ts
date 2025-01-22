@@ -31,7 +31,6 @@ export class BuildingService {
     const filteredBuildings: IBuilding[] = this._buildingJsonBackup.filter((building: IBuilding) => {
       return +building.closeYear <= year;
     });
-    console.log(filteredBuildings);
     this._buildings.next(this.getGeoJson(filteredBuildings));
   }
 

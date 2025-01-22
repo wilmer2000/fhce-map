@@ -1,29 +1,27 @@
-<div class="container">
-  <div class="timer-range-content">
-    <div class="input-range">
+<div class="container h-full relative">
+  <div class="absolute top-0 left-0 right-0 z-0 h-full w-full flex">
+    <div id="map" class="h-full w-full"></div>
+  </div>
+  <div class="absolute top-0 left-0 z-10 w-full p-2">
+    <div class="block h-full w-full bg-white rounded-lg p-2 shadow-xl">
       <input
         (change)="onYearChange($event)"
         [max]="yearsLimits.endYear"
         [min]="yearsLimits.startYear"
         [step]="step"
-        class="input-range-selector"
         id="year-selected"
         list="mark-years"
         name="year-selected"
         type="range"
+        class="input-range-selector"
       />
-      <datalist class="mark-years" id="mark-years">
+      <datalist id="mark-years" class="mark-years">
         @if (steps) {
           @for (step of steps; track step) {
             <option [label]="step" [value]="step">{{ step }}</option>
           }
         }
       </datalist>
-    </div>
-  </div>
-  <div class="map-container">
-    <div class="map-frame">
-      <div id="map"></div>
     </div>
   </div>
 </div>

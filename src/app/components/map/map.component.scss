@@ -3,32 +3,32 @@
   width: 100%;
   height: 100%;
 }
-
-.container {
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  position: relative;
-}
-
-.map-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-}
-
-.map-frame {
-  height: 100%;
-  width: 100%;
-}
-
-#map {
-  height: 100%;
-}
-
+//
+//.container {
+//  display: flex;
+//  height: 100vh;
+//  width: 100vw;
+//  position: relative;
+//}
+//
+//.map-container {
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  right: 0;
+//  bottom: 0;
+//  z-index: 1;
+//}
+//
+//.map-frame {
+//  height: 100%;
+//  width: 100%;
+//}
+//
+//#map {
+//  height: 100%;
+//}
+//
 .timer-range-content {
   position: absolute;
   z-index: 2;
@@ -46,23 +46,25 @@
     box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
   }
 
-  .mark-years {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    min-height: 16.349px;
 
-    option {
-      display: inline-block;
-      font-size: 0.8rem;
-      width: 30px;
-      padding: 0;
-    }
+}
+//
+/*********** Baseline, reset styles ***********/
+.mark-years {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 16.349px;
+
+  option {
+    display: inline-block;
+    font-size: 0.8rem;
+    width: 30px;
+    padding: 0;
   }
 }
 
-/*********** Baseline, reset styles ***********/
 .input-range-selector {
   -webkit-appearance: none;
   appearance: none;
