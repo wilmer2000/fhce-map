@@ -29,7 +29,7 @@ export class BuildingService {
 
   getBuildingsByYear(year: number): void {
     const filteredBuildings: IBuilding[] = this._buildingJsonBackup.filter((building: IBuilding) => {
-      return +building.openYear <= year && +building.closeYear >= year;
+      return +building.closeYear <= year;
     });
     console.log(filteredBuildings);
     this._buildings.next(this.getGeoJson(filteredBuildings));
@@ -43,7 +43,7 @@ export class BuildingService {
         this._buildingJsonBackup = this.parseCsvToJson(csvString);
         const buildings: IGeoJson = this.getGeoJson(this._buildingJsonBackup);
         this.setYearsLimits(buildings.metadata.startYear, buildings.metadata.endYear);
-        this._buildings.next(buildings);
+        this.getBuildingsByYear(buildings.metadata.startYear);
       });
   }
 
