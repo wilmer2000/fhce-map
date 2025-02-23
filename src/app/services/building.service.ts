@@ -70,18 +70,21 @@ export class BuildingService {
     const delimiter = ';';
     const lines = csvString.split('\n');
     const buildings: IBuilding[] = [];
+    const currentYear = YEARS_LIMIT.endYear;
+
+    if (lines[lines.length - 1] === '') lines.pop();
 
     for (let i = 1; i < lines.length; i++) {
       const currentLine: string[] = lines[i].split(delimiter);
-      if (currentLine.some((item) => item === '')) continue;
+      const closeYear = currentLine[4].length ? currentLine[4].trim() : currentYear.toString();
 
       buildings.push({
         name: currentLine[0].trim(),
         address: currentLine[1].trim(),
         coords: currentLine[2].trim(),
         openYear: currentLine[3].trim(),
-        closeYear: currentLine[4].trim(),
         type: currentLine[5].trim(),
+        closeYear
       });
     }
 
