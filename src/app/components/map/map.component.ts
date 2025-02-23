@@ -4,7 +4,7 @@ import * as L from 'leaflet';
 import { GeoJSON, LatLng, Layer, LeafletMouseEvent, Map } from 'leaflet';
 import { Subscription } from 'rxjs';
 
-import { IGeoJson, IMapState } from '../../interfaces/building.interface';
+import { EMapType, IGeoJson, IMapState } from '../../interfaces/building.interface';
 import { BuildingService } from '../../services/building.service';
 
 @Component({
@@ -15,6 +15,8 @@ import { BuildingService } from '../../services/building.service';
 })
 export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   mapState: IMapState;
+  readonly mapTypes = EMapType;
+
   private map: Map;
   private readonly buildingService = inject(BuildingService);
   private subscriptions: Subscription[] = [];
@@ -49,6 +51,12 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
     this.buildingService.getBuildings();
   }
 
+  onChangeFilter(filter: EMapType): void {
+    const filterType = { ...this.mapState, filterType: filter };
+    this.buildingService.setMapState(filterType);
+    this.buildingService.getBuildings()
+  }
+
   private initMap(): void {
     this.map = L.map('map', {
       center: [-34.9055, -56.1851], // Montevideo City
@@ -81,7 +89,7 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.featureGroup
       .on('click', (buildSelected: LeafletMouseEvent) => {
-        console.log(buildSelected);
+        console.log(buildSelected.layer?.feature.properties);
       })
       .addTo(this.map);
   }

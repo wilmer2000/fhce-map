@@ -32,16 +32,19 @@ export class BuildingService {
   }
 
   getBuildings(): void {
-    let filteredBuildings: IBuilding[] = this._buildingJsonBackup;
+    const buildings: IBuilding[] = [...this._buildingJsonBackup];
     const filter = this.stateMap.value.filterType;
     const yearSelected = this.stateMap.value.yearSelected;
 
-    if (filter !== 'ALL') {
-      filteredBuildings = filteredBuildings.filter((building: IBuilding) => building.type === filter);
-    }
+    const filteredBuildings = buildings.filter((building: IBuilding) => {
+      const closeYear = +building.closeYear;
+      const openYear = +building.openYear;
+      const filterType = building.type;
 
-    filteredBuildings = filteredBuildings.filter((building: IBuilding) => {
-      return +building.closeYear <= yearSelected;
+      const isInYear = yearSelected >= openYear && yearSelected <= closeYear;
+      const isInType = filter === EMapType.All || filter === filterType;
+
+      return isInYear && isInType;
     });
 
     this.setYearsLimits();
@@ -59,7 +62,7 @@ export class BuildingService {
       .pipe(take(1))
       .subscribe((csvString: string) => {
         this._buildingJsonBackup = this.parseCsvToJson(csvString);
-        this.getBuildings()
+        this.getBuildings();
       });
   }
 

@@ -22,6 +22,14 @@
           }
         }
       </datalist>
+
+      <ul>
+        <li><a (click)="onChangeFilter(mapTypes.Public)">{{ mapTypes.Public }}</a></li>
+        <li><a (click)="onChangeFilter(mapTypes.Private)">{{ mapTypes.Private }}</a></li>
+        <li><a (click)="onChangeFilter(mapTypes.Associative)">{{ mapTypes.Associative }}</a></li>
+        <li><a (click)="onChangeFilter(mapTypes.Independent)">{{ mapTypes.Independent }}</a></li>
+        <li><a (click)="onChangeFilter(mapTypes.All)">{{ mapTypes.All }}</a></li>
+      </ul>
     </div>
   </div>
 </div>
