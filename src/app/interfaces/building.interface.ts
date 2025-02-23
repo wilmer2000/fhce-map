@@ -5,6 +5,7 @@ export interface IBuilding {
   openYear: string;
   closeYear: string;
   type: string;
+  description: string;
 }
 
 export type TGeoJsonType =

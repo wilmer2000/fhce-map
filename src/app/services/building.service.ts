@@ -76,15 +76,15 @@ export class BuildingService {
 
     for (let i = 1; i < lines.length; i++) {
       const currentLine: string[] = lines[i].split(delimiter);
-      const closeYear = currentLine[4].length ? currentLine[4].trim() : currentYear.toString();
 
       buildings.push({
         name: currentLine[0].trim(),
         address: currentLine[1].trim(),
         coords: currentLine[2].trim(),
         openYear: currentLine[3].trim(),
+        closeYear: currentLine[4].length ? currentLine[4].trim() : currentYear.toString(),
         type: currentLine[5].trim(),
-        closeYear
+        description: currentLine[6].trim()
       });
     }
 
@@ -107,6 +107,7 @@ export class BuildingService {
           openYear: +building.openYear,
           closeYear: +building.closeYear || currentYear,
           mapIconColor: this.setMarkerColor(building.type as EMapType),
+          description: building.description
         },
       };
     });
