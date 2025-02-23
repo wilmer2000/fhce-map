@@ -41,9 +41,22 @@ export interface IYearsLimit {
   endYear: number;
 }
 
-export enum EMapIcon {
+export enum EMapType {
   Public = 'PRIVATE',
   Private = 'PUBLIC',
   Associative = 'ASSOCIATIVE',
   Independent = 'INDEPENDENT',
+  All = 'ALL',
+}
+
+
+export interface IMapState {
+  filterType: EMapType;
+  yearSelected: number;
+  yearLimit: {
+    startYear: number;
+    endYear: number;
+  };
+  step: number;
+  steps: number[];
 }

@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
 
-import { EMapIcon, IBuilding, IGeoJson, IGeoJsonFeature, IYearsLimit } from '../interfaces/building.interface';
+import { EMapType, IBuilding, IGeoJson, IGeoJsonFeature, IMapState } from '../interfaces/building.interface';
+
+export const YEARS_LIMIT = { startYear: 1900, endYear: 1960 };
 
 @Injectable({
   providedIn: 'root',
@@ -16,22 +18,39 @@ export class BuildingService {
     metadata: { startYear: 0, endYear: 0 },
   });
   buildings$ = this._buildings.asObservable();
-  private _yearsLimits: BehaviorSubject<IYearsLimit> = new BehaviorSubject<IYearsLimit>({ startYear: 0, endYear: 0 });
-  yearsLimits$ = this._yearsLimits.asObservable();
-  private _step: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  step$ = this._step.asObservable();
-  private _steps: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
-  steps$ = this._steps.asObservable();
+  private stateMap: BehaviorSubject<IMapState> = new BehaviorSubject<IMapState>({
+    filterType: EMapType.All,
+    yearSelected: 1900,
+    yearLimit: { ...YEARS_LIMIT },
+    step: 10,
+    steps: [],
+  });
+  stateMap$ = this.stateMap.asObservable();
 
   constructor() {
     this.getCsv();
   }
 
-  getBuildingsByYear(year: number): void {
-    const filteredBuildings: IBuilding[] = this._buildingJsonBackup.filter((building: IBuilding) => {
-      return +building.closeYear <= year;
+  getBuildings(): void {
+    let filteredBuildings: IBuilding[] = this._buildingJsonBackup;
+    const filter = this.stateMap.value.filterType;
+    const yearSelected = this.stateMap.value.yearSelected;
+
+    if (filter !== 'ALL') {
+      filteredBuildings = filteredBuildings.filter((building: IBuilding) => building.type === filter);
+    }
+
+    filteredBuildings = filteredBuildings.filter((building: IBuilding) => {
+      return +building.closeYear <= yearSelected;
     });
+
+    this.setYearsLimits();
     this._buildings.next(this.getGeoJson(filteredBuildings));
+  }
+
+  setMapState(mapState: IMapState): void {
+    const newState = { ...this.stateMap.value, ...mapState };
+    this.stateMap.next(newState);
   }
 
   private getCsv(): void {
@@ -40,9 +59,7 @@ export class BuildingService {
       .pipe(take(1))
       .subscribe((csvString: string) => {
         this._buildingJsonBackup = this.parseCsvToJson(csvString);
-        const buildings: IGeoJson = this.getGeoJson(this._buildingJsonBackup);
-        this.setYearsLimits(buildings.metadata.startYear, buildings.metadata.endYear);
-        this.getBuildingsByYear(buildings.metadata.startYear);
+        this.getBuildings()
       });
   }
 
@@ -53,7 +70,6 @@ export class BuildingService {
 
     for (let i = 1; i < lines.length; i++) {
       const currentLine: string[] = lines[i].split(delimiter);
-      // If exists any empty value in the table, won't be added in the geoJson Object
       if (currentLine.some((item) => item === '')) continue;
 
       buildings.push({
@@ -84,7 +100,7 @@ export class BuildingService {
           address: building.address,
           openYear: +building.openYear,
           closeYear: +building.closeYear || currentYear,
-          mapIconColor: this.setMarkerColor(building.type as EMapIcon),
+          mapIconColor: this.setMarkerColor(building.type as EMapType),
         },
       };
     });
@@ -101,35 +117,34 @@ export class BuildingService {
     };
   }
 
-  private setYearsLimits(startYear: number, endYear: number): void {
-    if (!startYear && !endYear) {
-      return;
-    }
-
-    const totalSteps = 10; // Adjust this as needed
+  private setYearsLimits(): void {
+    const totalSteps = 20;
+    const startYear = this.stateMap.value.yearLimit.startYear;
+    const endYear = this.stateMap.value.yearLimit.endYear;
     const rangeSpan = endYear - startYear;
+    const step = rangeSpan / totalSteps;
+    const yearList: number[] = [];
 
-    this._step.next(Math.floor(rangeSpan / totalSteps));
-    this._yearsLimits.next({ startYear, endYear });
-
-    const step: number[] = [];
-
-    for (let i = this._yearsLimits.value.startYear; i <= this._yearsLimits.value.endYear; i += this._step.value) {
-      step.push(i);
+    for (let i = startYear; i <= endYear; i += step) {
+      yearList.push(Math.round(i));
     }
 
-    this._steps.next(step);
+    if (yearList[yearList.length - 1] !== endYear) {
+      yearList.push(endYear);
+    }
+    const newState = { ...this.stateMap.value, steps: yearList, step };
+    this.setMapState(newState);
   }
 
-  private setMarkerColor(mapIcon: EMapIcon): string {
+  private setMarkerColor(mapIcon: EMapType): string {
     switch (mapIcon) {
-      case EMapIcon.Public:
+      case EMapType.Public:
         return '#0000FF';
-      case EMapIcon.Associative:
+      case EMapType.Associative:
         return '#ff00fb';
-      case EMapIcon.Private:
+      case EMapType.Private:
         return '#09eca9';
-      case EMapIcon.Independent:
+      case EMapType.Independent:
         return '#ffa600';
       default:
         return '#ff0000';

@@ -4,7 +4,7 @@ import * as L from 'leaflet';
 import { GeoJSON, LatLng, Layer, LeafletMouseEvent, Map } from 'leaflet';
 import { Subscription } from 'rxjs';
 
-import { IGeoJson, IYearsLimit } from '../../interfaces/building.interface';
+import { IGeoJson, IMapState } from '../../interfaces/building.interface';
 import { BuildingService } from '../../services/building.service';
 
 @Component({
@@ -14,9 +14,7 @@ import { BuildingService } from '../../services/building.service';
   styleUrl: './map.component.scss',
 })
 export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
-  yearsLimits: { startYear: number; endYear: number } = { startYear: 0, endYear: 0 };
-  step = 0;
-  steps: number[] = [];
+  mapState: IMapState;
   private map: Map;
   private readonly buildingService = inject(BuildingService);
   private subscriptions: Subscription[] = [];
@@ -29,18 +27,8 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
       }),
     );
     this.subscriptions.push(
-      this.buildingService.steps$.subscribe((steps: number[]) => {
-        if (steps) this.steps = steps;
-      }),
-    );
-    this.subscriptions.push(
-      this.buildingService.step$.subscribe((step: number) => {
-        if (step) this.step = step;
-      }),
-    );
-    this.subscriptions.push(
-      this.buildingService.yearsLimits$.subscribe((yearsLimits: IYearsLimit) => {
-        if (yearsLimits) this.yearsLimits = yearsLimits;
+      this.buildingService.stateMap$.subscribe((mapState: IMapState) => {
+        if (mapState) this.mapState = mapState;
       }),
     );
   }
@@ -56,7 +44,9 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   onYearChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const selectedYear = inputElement.value;
-    this.buildingService.getBuildingsByYear(+selectedYear);
+    const filter = { ...this.mapState, yearSelected: +selectedYear };
+    this.buildingService.setMapState(filter);
+    this.buildingService.getBuildings();
   }
 
   private initMap(): void {
