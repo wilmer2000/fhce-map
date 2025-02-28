@@ -1,35 +1,59 @@
-<div class="container h-full relative">
-  <div class="absolute top-0 left-0 right-0 z-0 h-full w-full flex">
+<div class="relative h-full w-full">
+  <div class="absolute left-0 right-0 top-0 z-0 flex h-full w-full">
     <div id="map" class="h-full w-full"></div>
   </div>
-  <div class="absolute top-0 left-0 z-10 w-full p-2">
-    <div class="block h-full w-full bg-white rounded-lg p-2 shadow-xl">
-      <input
-        (change)="onYearChange($event)"
-        [max]="mapState.yearLimit.endYear"
-        [min]="mapState.yearLimit.startYear"
-        [step]="mapState.step"
-        id="year-selected"
-        list="mark-years"
-        name="year-selected"
-        type="range"
-        class="input-range-selector"
-      />
-      <datalist id="mark-years" class="mark-years">
-        @if (mapState.steps) {
-          @for (step of mapState.steps; track step) {
-            <option [label]="step" [value]="step">{{ step }}</option>
-          }
-        }
-      </datalist>
-
-      <ul>
-        <li><a (click)="onChangeFilter(mapTypes.Public)">{{ mapTypes.Public }}</a></li>
-        <li><a (click)="onChangeFilter(mapTypes.Private)">{{ mapTypes.Private }}</a></li>
-        <li><a (click)="onChangeFilter(mapTypes.Associative)">{{ mapTypes.Associative }}</a></li>
-        <li><a (click)="onChangeFilter(mapTypes.Independent)">{{ mapTypes.Independent }}</a></li>
-        <li><a (click)="onChangeFilter(mapTypes.All)">{{ mapTypes.All }}</a></li>
-      </ul>
+  <div class="absolute left-0 top-0 z-10 w-full p-2">
+    <div class="block h-full w-full rounded-2xl bg-white p-4 shadow-xl">
+      <div class="mb-4 flex w-full">
+        <div class="flex-grow">
+          <h2 class="text-2xl font-medium">Teatros en la ciudad</h2>
+        </div>
+        <div class="flex-grow-0">
+          <div class="flex gap-2">
+            @for (button of mapTypes | keyvalue; track button.value) {
+              <button
+                class="rounded border px-3 py-2 text-base font-medium capitalize leading-none"
+                (click)="onChangeFilter(button.value)"
+                [ngClass]="{
+                  'border-gray-300 bg-white text-red-800': mapState.filterType !== button.value,
+                  'border-red-800 bg-red-800 text-white': mapState.filterType === button.value,
+                }"
+              >
+                {{ button.value | mapType }}
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="flex w-full gap-4">
+        <div class="flex-grow-0 w-[100px]">
+          <h3 class="flex h-full items-center text-3xl w-full">
+            <span class="me-2 text-xs">Año</span>
+            <span class="text-[32px] font-medium">
+              {{ mapState.yearSelected }}
+            </span>
+          </h3>
+        </div>
+        <div class="flex-grow">
+          <input
+            (change)="onYearChange($event)"
+            [max]="mapState.yearLimit.endYear"
+            [min]="mapState.yearLimit.startYear"
+            id="year-selected"
+            list="mark-years"
+            name="year-selected"
+            type="range"
+            class="input-range-selector"
+          />
+          <datalist id="mark-years" class="mark-years">
+            @if (mapState.steps) {
+              @for (step of mapState.steps; track step) {
+                <option [label]="step" [value]="step">{{ step }}</option>
+              }
+            }
+          </datalist>
+        </div>
+      </div>
     </div>
   </div>
 </div>

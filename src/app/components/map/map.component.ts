@@ -6,12 +6,15 @@ import { Subscription } from 'rxjs';
 
 import { EMapType, IGeoJson, IMapState } from '../../interfaces/building.interface';
 import { BuildingService } from '../../services/building.service';
+import { KeyValuePipe, NgClass } from '@angular/common';
+import { MapTypePipe } from '../../pipes/map-type.pipe';
 
 @Component({
   selector: 'app-map',
   standalone: true,
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
+  imports: [NgClass, KeyValuePipe, MapTypePipe],
 })
 export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   mapState: IMapState;
@@ -54,7 +57,7 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   onChangeFilter(filter: EMapType): void {
     const filterType = { ...this.mapState, filterType: filter };
     this.buildingService.setMapState(filterType);
-    this.buildingService.getBuildings()
+    this.buildingService.getBuildings();
   }
 
   private initMap(): void {

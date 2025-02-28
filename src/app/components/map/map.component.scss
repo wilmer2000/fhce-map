@@ -1,54 +1,13 @@
+$bg-color-dot-slider: #9a1122;
+$bg-color-dot-slider-alpha: rgba(154, 17, 34, 0.27);
+$bg-color-slider: #c4c7c7;
+
 :host {
   display: block;
   width: 100%;
   height: 100%;
 }
-//
-//.container {
-//  display: flex;
-//  height: 100vh;
-//  width: 100vw;
-//  position: relative;
-//}
-//
-//.map-container {
-//  position: absolute;
-//  top: 0;
-//  left: 0;
-//  right: 0;
-//  bottom: 0;
-//  z-index: 1;
-//}
-//
-//.map-frame {
-//  height: 100%;
-//  width: 100%;
-//}
-//
-//#map {
-//  height: 100%;
-//}
-//
-.timer-range-content {
-  position: absolute;
-  z-index: 2;
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
 
-  .input-range {
-    background-color: aliceblue;
-    max-width: 800px;
-    width: 100%;
-    padding: 15px 30px;
-    border-radius: 50px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
-  }
-
-
-}
-//
 /*********** Baseline, reset styles ***********/
 .mark-years {
   display: flex;
@@ -72,55 +31,47 @@
   cursor: pointer;
   width: 100%;
   margin-bottom: 5px;
-}
 
-/* Removes default focus */
-.input-range-selector:focus {
-  outline: none;
-}
+  &:focus {
+    outline: none;
+    transition: 500ms ease-in-out;
+  }
 
-/******** Chrome, Safari, Opera and Edge Chromium styles ********/
-/* slider track */
-.input-range-selector::-webkit-slider-runnable-track {
-  background-color: #add8e6;
-  border-radius: 0.5rem;
-  height: 0.5rem;
-}
+  &::-webkit-slider-runnable-track {
+    background-color: $bg-color-slider;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+  }
 
-/* slider thumb */
-.input-range-selector::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  margin-top: -4px; /* Centers thumb on the track */
-  background-color: #808080;
-  border-radius: 0.5rem;
-  height: 1rem;
-  width: 1rem;
-}
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    margin-top: -4px; /* Centers thumb on the track */
+    background-color: $bg-color-dot-slider;
+    border-radius: 0.5rem;
+    height: 1rem;
+    width: 1rem;
+  }
 
-.input-range-selector:focus::-webkit-slider-thumb {
-  outline: 3px solid #808080;
-  outline-offset: 0.125rem;
-}
+  &:focus::-webkit-slider-thumb {
+    outline: 8px solid $bg-color-dot-slider-alpha;
+  }
 
-/*********** Firefox styles ***********/
-/* slider track */
-.input-range-selector::-moz-range-track {
-  background-color: #add8e6;
-  border-radius: 0.5rem;
-  height: 0.5rem;
-}
+  &::-moz-range-track {
+    background-color: $bg-color-slider;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+  }
 
-/* slider thumb */
-.input-range-selector::-moz-range-thumb {
-  background-color: #808080;
-  border: none; /*Removes extra border that FF applies*/
-  border-radius: 0.5rem;
-  height: 1rem;
-  width: 1rem;
-}
+  &::-moz-range-thumb {
+    background-color: $bg-color-dot-slider;
+    border: none; /*Removes extra border that FF applies*/
+    border-radius: 0.5rem;
+    height: 1rem;
+    width: 1rem;
+  }
 
-.input-range-selector:focus::-moz-range-thumb {
-  outline: 3px solid #808080;
-  outline-offset: 0.125rem;
+  &:focus::-moz-range-thumb {
+    outline: 8px solid $bg-color-dot-slider-alpha;
+  }
 }

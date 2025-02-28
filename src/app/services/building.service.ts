@@ -124,8 +124,8 @@ export class BuildingService {
     };
   }
 
-  private setYearsLimits(): void {
-    const totalSteps = 20;
+  private setYearsLimits(yearsToDisplay = 5): void {
+    const totalSteps = yearsToDisplay;
     const startYear = this.stateMap.value.yearLimit.startYear;
     const endYear = this.stateMap.value.yearLimit.endYear;
     const rangeSpan = endYear - startYear;
