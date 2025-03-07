@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ModalService } from './services/modal.service';
+import { AsyncPipe } from '@angular/common';
+import { ModalComponent } from './components/modal/modal.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AsyncPipe, ModalComponent],
   templateUrl: './app.component.html',
   styles: [
     `
@@ -16,4 +19,7 @@ import { RouterOutlet } from '@angular/router';
     `,
   ],
 })
-export class AppComponent {}
+export class AppComponent {
+  private readonly modalService = inject(ModalService);
+  modalVisible = this.modalService.modalState$;
+}

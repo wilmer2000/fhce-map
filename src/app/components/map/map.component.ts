@@ -6,15 +6,16 @@ import { Subscription } from 'rxjs';
 
 import { EMapType, IGeoJson, IMapState } from '../../interfaces/building.interface';
 import { BuildingService } from '../../services/building.service';
-import { KeyValuePipe, NgClass } from '@angular/common';
+import { KeyValuePipe, NgClass, NgOptimizedImage } from '@angular/common';
 import { MapTypePipe } from '../../pipes/map-type.pipe';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-map',
   standalone: true,
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
-  imports: [NgClass, KeyValuePipe, MapTypePipe],
+  imports: [NgClass, KeyValuePipe, MapTypePipe, NgOptimizedImage],
 })
 export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   mapState: IMapState;
@@ -22,6 +23,7 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
 
   private map: Map;
   private readonly buildingService = inject(BuildingService);
+  private readonly modalService = inject(ModalService);
   private subscriptions: Subscription[] = [];
   private featureGroup: GeoJSON;
 
@@ -92,8 +94,16 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.featureGroup
       .on('click', (buildSelected: LeafletMouseEvent) => {
-        console.log(buildSelected.layer?.feature.properties);
+        if (!buildSelected) {
+          return;
+        }
+        const build: any = buildSelected.layer?.feature.properties;
+        this.openModal(build);
       })
       .addTo(this.map);
+  }
+
+  private openModal(build: any): void {
+    this.modalService.openModal(build);
   }
 }

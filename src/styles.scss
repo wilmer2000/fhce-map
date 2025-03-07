@@ -3,3 +3,23 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@layer components {
+  .btn {
+    @apply rounded border px-3 py-2 text-base font-medium capitalize leading-none text-pink-800 inline-block;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+
+    &:hover {
+      @apply border-red-800
+    }
+  }
+
+  .btn-primary {
+    @apply bg-blue-500 text-white;
+  }
+}

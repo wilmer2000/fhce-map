@@ -1,0 +1,14 @@
+<div class="flex h-screen w-screen absolute top-0 left-0 z-40 bg-black bg-opacity-80 justify-center items-center">
+  <div class="bg-white w-1/2 h-1/2 p-4 rounded-lg">
+    <div class="flex justify-between">
+      <h1 class="text-2xl font-bold">Modal</h1>
+      <button (click)="closeModal()" class="text-2xl font-bold">X</button>
+    </div>
+    <div class="flex justify-center items-center">
+      @if (modalContent) {
+        {{ modalContent }}
+      }
+    </div>
+  </div>
+
+</div>

@@ -1,1 +1,5 @@
 <router-outlet />
+@let modal = modalVisible | async;
+@if (modal?.isOpen) {
+  <app-modal></app-modal>
+}
