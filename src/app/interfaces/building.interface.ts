@@ -37,11 +37,6 @@ export interface IGeoJson {
   metadata: Record<string, any>;
 }
 
-export interface IYearsLimit {
-  startYear: number;
-  endYear: number;
-}
-
 export enum EMapType {
   Public = 'PRIVATE',
   Private = 'PUBLIC',
@@ -49,7 +44,6 @@ export enum EMapType {
   Independent = 'INDEPENDENT',
   All = 'ALL',
 }
-
 
 export interface IMapState {
   filterType: EMapType;

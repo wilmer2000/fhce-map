@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
 
 import { EMapType, IBuilding, IGeoJson, IGeoJsonFeature, IMapState } from '../interfaces/building.interface';
+import { MAP_COLOR } from '../constants/map.constant';
 
 export const YEARS_LIMIT = { startYear: 1900, endYear: 1960 };
 
@@ -56,6 +57,10 @@ export class BuildingService {
     this.stateMap.next(newState);
   }
 
+  setMarkerColor(mapIcon: EMapType): string {
+    return MAP_COLOR[mapIcon];
+  }
+
   private getCsv(): void {
     this.http
       .get<string>('/db.csv', { responseType: 'text' as 'json' })
@@ -84,7 +89,7 @@ export class BuildingService {
         openYear: currentLine[3].trim(),
         closeYear: currentLine[4].length ? currentLine[4].trim() : currentYear.toString(),
         type: currentLine[5].trim(),
-        description: currentLine[6].trim()
+        description: currentLine[6].trim(),
       });
     }
 
@@ -107,7 +112,7 @@ export class BuildingService {
           openYear: +building.openYear,
           closeYear: +building.closeYear || currentYear,
           mapIconColor: this.setMarkerColor(building.type as EMapType),
-          description: building.description
+          description: building.description,
         },
       };
     });
@@ -141,20 +146,5 @@ export class BuildingService {
     }
     const newState = { ...this.stateMap.value, steps: yearList, step };
     this.setMapState(newState);
-  }
-
-  private setMarkerColor(mapIcon: EMapType): string {
-    switch (mapIcon) {
-      case EMapType.Public:
-        return '#0000FF';
-      case EMapType.Associative:
-        return '#ff00fb';
-      case EMapType.Private:
-        return '#09eca9';
-      case EMapType.Independent:
-        return '#ffa600';
-      default:
-        return '#ff0000';
-    }
   }
 }

@@ -1,6 +1,6 @@
 <div class="relative h-full w-full">
   <div class="absolute left-0 right-0 top-0 z-0 flex h-full w-full">
-    <div id="map" class="h-full w-full"></div>
+    <div class="h-full w-full" id="map"></div>
   </div>
   <div class="absolute left-0 top-0 z-10 w-full p-4">
     <div class="block h-full w-full rounded-2xl bg-white p-4 shadow-xl">
@@ -13,9 +13,10 @@
         </div>
         <div class="flex-grow-0">
           <ul class="flex gap-3">
-            <li class="self-center m-0"><img [ngSrc]="'/assets/logo-fche.svg'" [width]="134" [height]="44" alt=""></li>
-            <li class="self-center m-0"><img [ngSrc]="'/assets/logo-facultad.svg'" [width]="134" [height]="48" alt=""></li>
-            <li class="self-center m-0"><img [ngSrc]="'/assets/logo-imm.svg'" [width]="134" [height]="48" alt=""></li>
+            <li class="self-center m-0"><img [height]="44" [ngSrc]="'/assets/logo-fche.svg'" [width]="134" alt=""></li>
+            <li class="self-center m-0"><img [height]="48" [ngSrc]="'/assets/logo-facultad.svg'" [width]="134" alt="">
+            </li>
+            <li class="self-center m-0"><img [height]="48" [ngSrc]="'/assets/logo-imm.svg'" [width]="134" alt=""></li>
           </ul>
         </div>
       </div>
@@ -33,13 +34,13 @@
             (change)="onYearChange($event)"
             [max]="mapState.yearLimit.endYear"
             [min]="mapState.yearLimit.startYear"
+            class="input-range-selector"
             id="year-selected"
             list="mark-years"
             name="year-selected"
             type="range"
-            class="input-range-selector"
           />
-          <datalist id="mark-years" class="mark-years">
+          <datalist class="mark-years" id="mark-years">
             @if (mapState.steps) {
               @for (step of mapState.steps; track step) {
                 <option [label]="step" [value]="step">{{ step }}</option>
@@ -52,10 +53,16 @@
   </div>
   <div class="absolute left-0 bottom-0 z-10 p-4">
     <div class="block rounded-2xl bg-white p-4 shadow-xl">
-      @for (button of mapTypes | keyvalue; track button.value) {
-        <button class="btn" (click)="onChangeFilter(button.value)">
-          {{ button.value | mapType }}
-        </button>
+      @for (list of mapTypes | keyvalue; track list.value) {
+        @if (list.value !== mapTypes.All) {
+          <div class="flex items-center">
+            <div class="me-3">
+              <div class="rounded-full w-[12px] h-[12px] block"
+                   [ngStyle]="{ 'background': MAP_COLOR[list.value] }"></div>
+            </div>
+            <div class="flex-grow">{{ list.value | mapType }}</div>
+          </div>
+        }
       }
     </div>
   </div>

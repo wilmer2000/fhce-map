@@ -1,16 +1,20 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { take } from 'rxjs';
 
-import { ModalService } from '../../services/modal.service';
+import { IModal, ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [],
-  templateUrl: './modal.component.html'
+  templateUrl: './modal.component.html',
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit {
+  modalContent: IModal;
   private readonly modalService = inject(ModalService);
-  readonly modalContent = this.modalService.modalState$.subscribe((modalContent) => {})
+
+  ngOnInit(): void {
+    this.modalService.modalState$.pipe(take(1)).subscribe((modalContent: IModal) => (this.modalContent = modalContent));
+  }
 
   closeModal(): void {
     this.modalService.closeModal();

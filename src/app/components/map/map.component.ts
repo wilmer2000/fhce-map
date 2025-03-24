@@ -6,21 +6,22 @@ import { Subscription } from 'rxjs';
 
 import { EMapType, IGeoJson, IMapState } from '../../interfaces/building.interface';
 import { BuildingService } from '../../services/building.service';
-import { KeyValuePipe, NgClass, NgOptimizedImage } from '@angular/common';
+import { KeyValuePipe, NgOptimizedImage, NgStyle } from '@angular/common';
 import { MapTypePipe } from '../../pipes/map-type.pipe';
 import { ModalService } from '../../services/modal.service';
+import { MAP_COLOR } from '../../constants/map.constant';
 
 @Component({
   selector: 'app-map',
   standalone: true,
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
-  imports: [NgClass, KeyValuePipe, MapTypePipe, NgOptimizedImage],
+  imports: [KeyValuePipe, MapTypePipe, NgOptimizedImage, NgStyle],
 })
 export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   mapState: IMapState;
   readonly mapTypes = EMapType;
-
+  protected readonly MAP_COLOR = MAP_COLOR;
   private map: Map;
   private readonly buildingService = inject(BuildingService);
   private readonly modalService = inject(ModalService);
@@ -56,22 +57,18 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
     this.buildingService.getBuildings();
   }
 
-  onChangeFilter(filter: EMapType): void {
-    const filterType = { ...this.mapState, filterType: filter };
-    this.buildingService.setMapState(filterType);
-    this.buildingService.getBuildings();
-  }
-
   private initMap(): void {
     this.map = L.map('map', {
       center: [-34.9055, -56.1851], // Montevideo City
       zoom: 13,
     });
 
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
       maxZoom: 18,
       minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     });
 
     tiles.addTo(this.map);
