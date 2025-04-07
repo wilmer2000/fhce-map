@@ -38,10 +38,11 @@ export interface IGeoJson {
 }
 
 export enum EMapType {
-  Public = 'PRIVATE',
   Private = 'PUBLIC',
-  Associative = 'ASSOCIATIVE',
+  Public = 'PRIVATE',
   Independent = 'INDEPENDENT',
+  Associative = 'ASSOCIATIVE',
+  Movie = 'MOVIE',
   All = 'ALL',
 }
 

@@ -9,7 +9,7 @@ import { BuildingService } from '../../services/building.service';
 import { KeyValuePipe, NgOptimizedImage, NgStyle } from '@angular/common';
 import { MapTypePipe } from '../../pipes/map-type.pipe';
 import { IModal, ModalService } from '../../services/modal.service';
-import { MAP_COLOR } from '../../constants/map.constant';
+import { MAP_COLOR, MAP_CONTAINER_ID, MAP_MVD_CENTER, MAP_ZOOM } from '../../constants/map.constant';
 
 @Component({
   selector: 'app-map',
@@ -21,7 +21,9 @@ import { MAP_COLOR } from '../../constants/map.constant';
 export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   mapState: IMapState;
   readonly mapTypes = EMapType;
-  protected readonly MAP_COLOR = MAP_COLOR;
+  protected readonly mapContainerId = MAP_CONTAINER_ID;
+  protected readonly mapColors = MAP_COLOR;
+
   private map: Map;
   private readonly buildingService = inject(BuildingService);
   private readonly modalService = inject(ModalService);
@@ -58,9 +60,9 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   private initMap(): void {
-    this.map = L.map('map', {
-      center: [-34.9055, -56.1851], // Montevideo City
-      zoom: 13
+    this.map = L.map(MAP_CONTAINER_ID, {
+      center: MAP_MVD_CENTER, // Montevideo City
+      zoom: MAP_ZOOM
     });
 
     const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
