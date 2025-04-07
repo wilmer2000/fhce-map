@@ -13,7 +13,12 @@ export class ModalComponent implements OnInit {
   private readonly modalService = inject(ModalService);
 
   ngOnInit(): void {
-    this.modalService.modalState$.pipe(take(1)).subscribe((modalContent: IModal) => (this.modalContent = modalContent));
+    this.modalService.modalState$.pipe(
+      take(1)
+    ).subscribe((modalContent: IModal) => {
+      console.log(modalContent);
+      this.modalContent = modalContent;
+    });
   }
 
   closeModal(): void {

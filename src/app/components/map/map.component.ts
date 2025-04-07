@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import * as geojson from 'geojson';
 import * as L from 'leaflet';
-import { GeoJSON, LatLng, Layer, LeafletMouseEvent, Map } from 'leaflet';
+import { GeoJSON, LatLng, Layer, LeafletMouseEvent, Map, Point } from 'leaflet';
 import { Subscription } from 'rxjs';
 
 import { EMapType, IGeoJson, IMapState } from '../../interfaces/building.interface';
 import { BuildingService } from '../../services/building.service';
 import { KeyValuePipe, NgOptimizedImage, NgStyle } from '@angular/common';
 import { MapTypePipe } from '../../pipes/map-type.pipe';
-import { ModalService } from '../../services/modal.service';
+import { IModal, ModalService } from '../../services/modal.service';
 import { MAP_COLOR } from '../../constants/map.constant';
 
 @Component({
@@ -16,7 +16,7 @@ import { MAP_COLOR } from '../../constants/map.constant';
   standalone: true,
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
-  imports: [KeyValuePipe, MapTypePipe, NgOptimizedImage, NgStyle],
+  imports: [KeyValuePipe, MapTypePipe, NgOptimizedImage, NgStyle]
 })
 export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   mapState: IMapState;
@@ -32,12 +32,12 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
     this.subscriptions.push(
       this.buildingService.buildings$.subscribe((buildings: IGeoJson) => {
         if (this.map) this.loadMarks(buildings);
-      }),
+      })
     );
     this.subscriptions.push(
       this.buildingService.stateMap$.subscribe((mapState: IMapState) => {
         if (mapState) this.mapState = mapState;
-      }),
+      })
     );
   }
 
@@ -60,7 +60,7 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   private initMap(): void {
     this.map = L.map('map', {
       center: [-34.9055, -56.1851], // Montevideo City
-      zoom: 13,
+      zoom: 13
     });
 
     const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -68,7 +68,7 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 18,
-      minZoom: 3,
+      minZoom: 3
     });
 
     tiles.addTo(this.map);
@@ -84,9 +84,16 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
         return new L.CircleMarker(latlng, {
           radius: 5,
           fillOpacity: 1,
-          color: geoJsonPoint.properties.mapIconColor,
+          color: geoJsonPoint.properties.mapIconColor
         });
-      },
+      }
+    }).bindTooltip((layer: any) => {
+      return layer.feature.properties.name;
+    }, {
+      direction: 'top',
+      offset: new Point(0, -10),
+      opacity: 1,
+      className: 'tooltip'
     });
 
     this.featureGroup
@@ -101,6 +108,7 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   private openModal(build: any): void {
-    this.modalService.openModal(build);
+    const modal: IModal = ModalService.buildModalContent(build);
+    this.modalService.openModal(modal);
   }
 }

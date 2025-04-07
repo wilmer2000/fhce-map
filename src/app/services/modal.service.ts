@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { EMapType } from '../interfaces/building.interface';
 
 export interface IModal {
-  isOpen: boolean;
+  isOpen?: boolean;
   content: {
     photo?: string;
     title?: string;
@@ -16,24 +16,35 @@ export interface IModal {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ModalService {
   private modalState = signal<IModal>({ isOpen: false, content: {} });
   modalState$: Observable<IModal> = toObservable(this.modalState);
 
-  openModal(content = {}): void {
-    const newState = {
-      isOpen: true,
-      content,
+  static buildModalContent(obj: any): IModal {
+    console.log(obj);
+    return {
+      content: {
+        photo: obj.photo,
+        title: obj.title,
+        type: obj.type,
+        description: obj.description,
+        btnMore: obj.btnMore,
+        logos: obj.logos
+      }
     };
+  }
+
+  openModal(modal: IModal): void {
+    const newState = { ...modal, isOpen: true };
     this.modalState.set(newState);
   }
 
   closeModal(): void {
     const newState = {
       isOpen: false,
-      content: {},
+      content: {}
     };
     this.modalState.set(newState);
   }

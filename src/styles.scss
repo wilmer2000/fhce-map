@@ -25,4 +25,13 @@
       @apply bg-gray-950 border-gray-950
     }
   }
+
+  .tooltip {
+    @apply rounded border border-gray-300 capitalize px-3 py-2 text-pink-800 font-medium text-center shadow-none;
+    font-family: "Roboto", sans-serif;
+
+    &:before {
+      display: none;
+    }
+  }
 }
