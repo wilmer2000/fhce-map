@@ -5,19 +5,18 @@ import { AsyncPipe } from '@angular/common';
 import { ModalComponent } from './components/modal/modal.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, AsyncPipe, ModalComponent],
-  templateUrl: './app.component.html',
-  styles: [
-    `
+    selector: 'app-root',
+    imports: [RouterOutlet, AsyncPipe, ModalComponent],
+    templateUrl: './app.component.html',
+    styles: [
+        `
       :host {
         display: flex;
         width: 100vw;
         height: 100vh;
       }
     `,
-  ],
+    ]
 })
 export class AppComponent {
   private readonly modalService = inject(ModalService);

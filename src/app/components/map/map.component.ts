@@ -12,11 +12,10 @@ import { IModal, ModalService } from '../../services/modal.service';
 import { MAP_COLOR, MAP_CONTAINER_ID, MAP_MVD_CENTER, MAP_ZOOM } from '../../constants/map.constant';
 
 @Component({
-  selector: 'app-map',
-  standalone: true,
-  templateUrl: './map.component.html',
-  styleUrl: './map.component.scss',
-  imports: [KeyValuePipe, MapTypePipe, NgOptimizedImage, NgStyle]
+    selector: 'app-map',
+    templateUrl: './map.component.html',
+    styleUrl: './map.component.scss',
+    imports: [KeyValuePipe, MapTypePipe, NgOptimizedImage, NgStyle]
 })
 export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   mapState: IMapState;
