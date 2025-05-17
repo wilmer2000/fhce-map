@@ -1,7 +1,10 @@
-<div class="absolute left-0 top-0 z-40 flex h-screen w-screen items-center justify-center bg-black bg-opacity-80">
-  <div class="w-1/2 max-w-[480px] rounded-lg bg-white p-4">
+<div class="absolute left-0 top-0 z-40 flex h-screen w-screen items-center justify-center bg-black bg-opacity-80 p-6">
+  <div class="rounded-lg bg-white p-4 sm:max-w-[480px]">
     <div class="flex h-full flex-col flex-wrap gap-3">
       @if (modalContent) {
+        @if (modalContent.content.subtitle) {
+          <h6 class="text-xs text-neutral-700">{{ modalContent.content.subtitle }}</h6>
+        }
         <div class="flex-grow">
           @if (modalContent.content.photo) {
             <img [src]="modalContent.content.photo" alt="Modal Image" class="h-auto w-full rounded-lg" />
@@ -12,8 +15,18 @@
           @if (modalContent.content.type) {
             <p>{{ modalContent.content.type }}</p>
           }
+          @if (modalContent.content.html) {
+            <div [innerHTML]="modalContent.content.html"></div>
+          }
           @if (modalContent.content.description) {
             <p>{{ modalContent.content.description }}</p>
+          }
+          @if (modalContent.content.logos) {
+            <div class="flex flex-wrap justify-center gap-3 mt-4">
+              @for (logo of modalContent.content.logos; track logo) {
+                <img [src]="logo" alt="Logo" class="h-auto" />
+              }
+            </div>
           }
         </div>
       }

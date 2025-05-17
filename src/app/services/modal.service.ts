@@ -2,14 +2,17 @@ import { Injectable, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { EMapType } from '../interfaces/building.interface';
+import { SafeHtml } from '@angular/platform-browser';
 
 export interface IModal {
   isOpen?: boolean;
   content: {
     photo?: string;
     title?: string;
+    subtitle?: string;
     type?: EMapType;
     description?: string;
+    html?: SafeHtml;
     btnMore?: string;
     logos?: string[];
   };
@@ -23,7 +26,6 @@ export class ModalService {
   modalState$: Observable<IModal> = toObservable(this.modalState);
 
   static buildModalContent(obj: any): IModal {
-    console.log(obj);
     return {
       content: {
         photo: obj.photo,
