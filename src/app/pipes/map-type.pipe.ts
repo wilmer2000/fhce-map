@@ -19,6 +19,8 @@ export class MapTypePipe implements PipeTransform {
         return 'Independientes';
       case EMapType.Movie:
         return 'Cines';
+      case EMapType.Local:
+        return 'De Barrio';
       case EMapType.All:
         return 'Todos';
       default:

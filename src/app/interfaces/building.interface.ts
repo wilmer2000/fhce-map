@@ -43,6 +43,7 @@ export enum EMapType {
   Independent = 'INDEPENDENT',
   Associative = 'ASSOCIATIVE',
   Movie = 'MOVIE',
+  Local = 'LOCAL',
   All = 'ALL',
 }
 
