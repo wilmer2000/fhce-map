@@ -1,53 +1,74 @@
-name;address;coords;openYear;closeYear;type;description
-CASA DE COMEDIAS;1° de Mayo ;-34.907092099725865, -56.207831039333506;1793;1855;PRIVATE;PRIVATE
-TEATRO FRANCÉS;25 de Mayo ;;1843;1847;PRIVATE;PRIVATE
-TEATRO ITALIANO;Calle Uruguay;;1843;1851;PRIVATE;PRIVATE
-TEATRO SAN FELIPE (el viejo);1° de Mayo 1445;-34.90682451742941, -56.20807506062567;1855;1879;PRIVATE;PRIVATE
-TEATRO SOLÍS;Buenos Aires 678;-34.90789269809609, -56.201139789076464;1856;1937;PRIVATE;PRIVATE
-ALCÁZAR LÍRICO;Treinta y Tres 1382-85;-34.906684096024286, -56.20508146024012;1869;1871;PRIVATE;PRIVATE
-CIBILS;Ituzaingó 1511;-34.90435480171638, -56.205283473731505;1871;1912;PRIVATE;PRIVATE
-TEATRO SAN FELIPE Y SANTIAGO (el nuevo);1° de Mayo 1445;-34.906798121794296, -56.20806433178939;1880;1905;PRIVATE;PRIVATE
-LA LIRA ;Paysandú 767;-34.90239939367849, -56.19946598722287;1885;;PRIVATE ;PRIVATE 
-POLITEAMA;Colonia y Paraguay;-34.90482263037026, -56.19261490480741;1887;1895;PRIVATE ;PRIVATE 
-SALA VERDI;Soriano 914;-34.90822289704118, -56.19643490256777;1894;1946;PRIVATE;PRIVATE
-CASINO ORIENTAL;Florida 1174;-34.909568011577484, -56.19872227373135;1895;1919;PRIVATE;PRIVATE
-ROYAL (a/Odeón);Bartolomé Mirte y Reconquista;-34.90818703343212, -56.20119556062516;1895;1953;PRIVATE;PRIVATE
-STELLA D'ITALIA;Mercedes 1805;-34.90040368291352, -56.17811081605926;1895;;PRIVATE ;PRIVATE 
-EDEN;Juan V. Viacaba entre Bogota y Portugal;-34.88718071904579, -56.251798385934826;1898;1940;PRIVATE;PRIVATE
-POLITEAMA;Colonia y Paraguay;-34.904910617904505, -56.19257198946231;1901;1919;PRIVATE;PRIVATE
-DE LOS POCITOS;Pereira y Berro ;-34.90956442043431, -56.14748231791267;1902;1910;PRIVATE;PRIVATE
-VICTORIA HALL;Río Negro 1483;-34.903419993753616, -56.19401428907679;1902;1948;PRIVATE ;PRIVATE 
-ROMA ;8 de Octubre entre Cipriano Miro y Larravide;-34.87405394334625, -56.139495023989845;1905;1928;PRIVATE;PRIVATE
-URQUIZA;Mercedes y Andes;-34.90436049445823, -56.198316073731576;1905;1931;PRIVATE;PRIVATE
-ARTIGAS;Andes y Colonia;-34.90563849692257, -56.19802144489521;1921;1981;PRIVATE;PRIVATE
-MARCONI;Yacaré 1590;-34.904595160729286, -56.21081290126721;1909;1912;PRIVATE;PRIVATE
-MARCONI;Yacaré 1590;-34.904595160729286, -56.21081290126721;1915;1922;PRIVATE;PRIVATE
-EL PORTEÑO;Yacaré 1590;-34.904595160729286, -56.21081290126721;1923;1927;PRIVATE;PRIVATE
-18 DE JULIO;Av. 18 de Julio 1286;-34.90568792294488, -56.18823620480721;1910;1952;PRIVATE;PRIVATE
-COLON;Cerrito y Ciudadela;-34.90322668901268, -56.200882616059026;1910;1931;PRIVATE;PRIVATE
-LUMIERE ;Florida 1270;-34.905542626923115, -56.19971269067331;1910;1911;PRIVATE;PRIVATE
-COLISEO FLORIDA;Florida 1270;-34.905542626923115, -56.19971269067331;1912;1917;PRIVATE;PRIVATE
-de la COMEDIA ;Florida 1270;-34.905542626923115, -56.19971269067331;1918;1920;PRIVATE;PRIVATE
-APOLO ;Grecia 3281;-34.892104500817865, -56.24799878946526;1915;1962;PRIVATE;PRIVATE
-CATALUNYA ;Héctor Gutierrez Ruiz 1269 ;-34.90733530927489, -56.19128009377608;1918;1921;PRIVATE;PRIVATE
-ALBENIZ ;Héctor Gutierrez Ruiz 1269 ;-34.90733530927489, -56.19128009377609;1922;1937;PRIVATE;PRIVATE
-ZABALA;Av. 18 de Julio 994;-34.90612819367509, -56.194939016058896;1922;1923;PRIVATE;PRIVATE
-ODEÓN ;Paysandú 767;-34.90239939367849, -56.19946598722287;1925;1965;PRIVATE ;PRIVATE 
-ATENEO POPULAR;Río Negro 1180;-34.909126535343965, -56.19307616062498;1931;;ASSOCIATIVE;ASSOCIATIVE
-AUDITORIO DEL SODRE;Mercedes y Andes;-34.90436049445823, -56.19831607373153;1931;1971;PUBLIC ;PUBLIC 
-TEATRO SOLÍS;Buenos Aires 678;-34.90789269809609, -56.201139789076464;1937;;PUBLIC ;PUBLIC 
-NOTARIADO;Guayabos 1729;-34.903486291657224, -56.17863943140409;1938;;ASSOCIATIVE;ASSOCIATIVE
-SALA VERDI;Soriano 914;-34.90822289704118, -56.19643490256777;1946;2024;PUBLIC ;PUBLIC 
-EL TINGLADO;Fernandez Crespo y Mercedes;-34.89971978979937, -56.176181087223036;1947;1958;INDEPENDENT;INDEPENDENT
-VICTORIA HALL;Río Negro 1483;-34.903419993753616, -56.19401428907679;1948;1956;PUBLIC ;PUBLIC 
-ZHITLOVSKY / TEATRO ASTRAL;Durazno 1476;-34.90994304605922, -56.18346427597008;1950;;ASSOCIATIVE;ASSOCIATIVE
-TEATRO DEL PUEBLO;San José y Yaguaron;-34.90638734121998, -56.187894789461865;1953;1955;INDEPENDENT;INDEPENDENT
-TEATRO EL GALPÓN;Mercedes y Roxlo;-34.90216229119376, -56.182320616059116;1951;1968;INDEPENDENT;INDEPENDENT
-TEATRO VICTORIA;Río Negro 1483;-34.903419993753616, -56.19401428907679;1956;2024;INDEPENDENT ;INDEPENDENT 
-EL TINGLADO;Colonia y Martín C. Martínez;-34.89877798186486, -56.17131396817011;1958;;INDEPENDENT;INDEPENDENT
-FLORENCIO SANCHEZ;Grecia 3281;-34.892104500817865, -56.24799878946526;1962;2024;PUBLIC ;PUBLIC 
-ASOCIACIÓN CRISTIANA DE JÓVENES;Colonia 1870;-34.9008922211104, -56.17645048946326;1962;;ASSOCIATIVE ;ASSOCIATIVE 
-CARLOS BRUSSA (ex-Odeon) ;Paysandú 767;-34.90239939367849, -56.19946598722287;1965;1996;ASSOCIATIVE ;ASSOCIATIVE 
-INSTITUTO CULTURAL ANGLO URUGUAYO - TEATRO ANGLO;San José 1426;-34.90659969877617, -56.184860273731545;1967;;PRIVATE;PRIVATE
-TEATRO EL GALPÓN;18 de Julio 1618;-34.90405109268587, -56.181071744895384;1969;;INDEPENDENT;INDEPENDENT
-CASINO ;Andes y Colonia;-34.90563849692257, -56.19802144489521;1908;1920;PRIVATE;PRIVATE
+name;address;coords;openYear;closeYear;type;description;photo;link
+;;;;;;;;
+CASA DE COMEDIAS;1° de Mayo ;-34.907092099725865, -56.207831039333506;1793;1855;PRIVATE;Es considerado el primer teatro de la ciudad de Montevideo. Era un galpón de techo a dos aguas situado en la calle que hoy se llama 1ro de Mayo, en el mismo solar dónde hoy se encuentra el Palacio Taranco. ;;
+TEATRO FRANCÉS;25 de Mayo ;;1843;1847;PRIVATE;"Sala modesta que funcionó durante la Guerra Grande situada en la ""Rue du Portón"" (hoy calle 25 de Mayo) cuyo público estaba conformado principalmente por legionarios franceses. ";;
+TEATRO ITALIANO;Calle Uruguay;;1843;1851;PRIVATE;Al igual que el Teatro Francés, el Teatro Italiano funcionó durante la Guerra Grande, a mediados del siglo XIX, en la calle Uruguay. ;;
+TEATRO SAN FELIPE (el viejo);1° de Mayo 1445;-34.90682451742941, -56.20807506062567;1855;1879;PRIVATE;Luego del cierre de la Casa de Comedias, se abrió el teatro San Felipe en el mismo local con algunas mejoras, que fué demolido para construir el nuevo Teatro San Felipe y Santiago. ;;
+TEATRO SOLÍS;Buenos Aires 678;-34.90789269809609, -56.201139789076464;1856;1937;PRIVATE;"Inaugurado el 25 de agosto de 1856 con la ópera ""Hernani"" de Verdi, el Teatro Solís es el principal teatro de la ciudad, tanto por su centralidad como por sus dimensiones y su rol a lo largo de la historia.";teatro-solis.jpg;https://www.teatrosolis.org.uy/home
+ALCÁZAR LÍRICO;Treinta y Tres 1382-85;-34.906684096024286, -56.20508146024012;1869;1871;PRIVATE;Teatro de varietés y de vaudeville, de fuerte impornta francesa, que a finales del siglo XIX recibía a artistas reclutados en París. Generó tensiones en la moral montevideana de la época y la oposición de la Iglesia. ;;
+CIBILS;Ituzaingó 1511;-34.90435480171638, -56.205283473731505;1871;1912;PRIVATE;El edificio, proyectado por el arquitecto Juan Alberto Capurro, fue el cuatro teatro construído en la ciudad y un escenario de gran importancia, albergando grandes figuras de la lírica, la comedia y el drama. ;;
+TEATRO SAN FELIPE Y SANTIAGO (el nuevo);1° de Mayo 1445;-34.906798121794296, -56.20806433178939;1880;1905;PRIVATE;De fachada neoclásica e interior a la italiana, fue construído en el mimo solar dónde funcionó la Casa de Comedias. Supo albergar zarzuelas, óperas y teatro picaresco, funcionando posteriormente como cinematógráfo. ;;
+LA LIRA ;Paysandú 767;-34.90239939367849, -56.19946598722287;1885;1924;PRIVATE ;Esta sala fue inaugurada como un conservatorio de música que incluía una sala de concierto. El cese de sus actividades en los años veinte está relacionado con la creciente competencia con instituciones similares.;;
+POLITEAMA;Colonia y Paraguay;-34.90482263037026, -56.19261490480741;1887;1895;PRIVATE  ;En el lugar del actual Ministerio de Economía y Finanzas existieron sucesivamente dos teatros privados: el Politeama I (1887-1895) el Politeama II (1901-1919 o 1920). Ambos fueron destruidos por incendios.;;
+CENTRO ARTESANO;Bvar Aparicio Saravia y Monterroso;-34.82467064245601, -56.20442708465493;1891;1949;PRIVATE ;Inicialmente inaugurado como centro de esparcimiento y formación para trabajadores de la zona, en 1937 atravesó una varias reformas para mordernizar la fachada y proyectar películas. En 1949 pasó a la órbita pública. ;;
+CENTRO ARTESANO;Bvar Aparicio Saravia y Monterroso;-34.82467064245601, -56.20442708465494;1949;;PUBLIC;El Centro Artesano se inauguró como centro de esparcimiento y formación para trabajadores de la zona. Fue reformado en 1937 para mordernizar la fachada y proyectar películas, y en 1949 pasó a la órbita pública. ;;
+SALA VERDI;Soriano 914;-34.90822289704118, -56.19643490256777;1894;1946;PRIVATE;La Sala Verdi fue inaugurada en 1894, funcionando como conservatorio de música. En 1946 fue comprada por la Intendencia para la banda municipal y en 1954 fue reformada y transformada en sala de teatro.;;
+CASINO ORIENTAL;Florida 1174;-34.909568011577484, -56.19872227373135;1895;1919;PRIVATE;El Casino Oriental funcionó a fines del siglo XIX e inicios del XX. Edificio modesto, participó con su programación de variedades y music hall en el ambiente bohemio de la zona, que contaba con muchos cafés y cines.;;
+ROYAL (a/Odeón);Bartolomé Mirte y Reconquista;-34.90818703343212, -56.20119556062516;1895;1953;PRIVATE;El Teatro Royal fue inaugurado en 1895. Fue famoso por su cabaret, sus espectáculos de variedades, circo o boxeo. Sus actividades disminuyeron hasta que se convirtiera en los años cuarenta en el cine pornográfico Hindú.;;
+STELLA D'ITALIA;Mercedes 1805;-34.90040368291352, -56.17811081605926;1895;;PRIVATE ;El Stella d’Italia fue construido en 1895 por la Societá de Mutuos Socorros. Funcionó como cine y volvió a ser un teatro en 1952. Tras varios cierres y reaperturas, fue adquirido en 1990 por el grupo de la Gaviota.;;
+EDEN;Juan V. Viacaba entre Bogota y Portugal;-34.887956, -56.251284;1898;1949;PRIVATE;El Teatro Eden fue instalado en 1898 en el local de la sociedad Villa del Cerro. Funcionó hasta mediados del siglo XX como cine y teatro, además de organizarse actos políticos, conferencias y eventos festivos.;;
+POLITEAMA;Colonia y Paraguay;-34.904910617904505, -56.19257198946231;1901;1919;PRIVATE;En el lugar del actual Ministerio de Economía y Finanzas existieron sucesivamente dos teatros privados: el Politeama I (1887-1895) el Politeama II (1901-1919 o 1920). Ambos fueron destruidos por incendios.;;
+DE LOS POCITOS;Pereira y Berro ;-34.90956442043431, -56.14748231791267;1902;1910;PRIVATE;El Teatro de los Pocitos funcionó a principio del siglo XX en el entonces balneario Pueblo de los Pocitos. Estuvo abandonado y en 1910 fue recuperado y reformado para servir de local a la iglesia de la zona.;;
+VICTORIA HALL;Río Negro 1483;-34.903419993753616, -56.19401428907679;1902;1948;PRIVATE ;El Victoria Hall fue creado como teatro y centro de eventos. Funcionó en 1912 como Escuela Experimental de Arte Dramático. Tuvo largos períodos de inactividad, antes de reabrir sus puertas 1998 como Teatro Victoria. ;;
+ROMA ;8 de Octubre entre Cipriano Miro y Larravide;-34.87405394334625, -56.139495023989845;1905;1928;PRIVATE;El Roma fue una pequeña sala instalada en Sociedad Italiana de Socorros Mutuos de la Unión. En 1928 se convirtió por poco tiempo en cine, y fue luego un local comercial hasta su demolición en 1957.;;
+URQUIZA;Mercedes y Andes;-34.90436049445823, -56.198316073731576;1905;1931;PRIVATE;El Urquiza, inaugurado en 1905, fue un espacio central de la vida teatral de la Belle Epoque y destacado por su programación prestigiosa e internacional. En 1931 fue expropiado para el SODRE recién creado. ;;
+CASINO  ;Andes y Colonia;-34.90563849692257, -56.19802144489521;1908;1920;PRIVATE;El edificio fue proyectado en 1908 por el ingeniero Domingo Selva por encargo del empresario argentino que construyó en Buenos Aires, el teatro de igual nombre. En 1922 fue adquirido por un nuevo propietario pasando desde entonces a denominarse teatro Artigas. ;;
+ARTIGAS;Andes y Colonia;-34.90563849692257, -56.19802144489521;1921;1981;PRIVATE;Adquirido en 1923 por el empresario Caderosso (ex Casino) sufrió profundas modificaciones y ampliaciones. El techo de la sala tuvo una cubierta corrediza y en su piso más alto funcionó el cabaret “Chantecler”. Referente de la vida citadina, pasó a ser cine en 1977 y es demolido en 1981. ;;
+EL PORTEÑO / MARCONI;Yacaré 1590;-34.905287, -56.211031;1909;1926;PRIVATE;Situado próximo al puerto, el Porteño fue propiedad de José Maria Lapido. Mantuvo cierto parentesco con el Royal tanto en el género de los espectáculos como en su concepción edilicia. Se exhibieron variedad de espectáculos escénicos (revistas y circos) así como boxeo y actos políticos.  La sala se incendia en 1926 y es reconstruida posteriormente para la proyección de cien. Chequear Marconi, fecha y algún dato más.;;
+18 DE JULIO;Av. 18 de Julio 1286;-34.90568792294488, -56.18823620480721;1910;1952;PRIVATE;De estilo art nouveau, fue inaugurado en 1910 y constituyó uno de los teatros centrales de la escena nacional. Luego de 50  años de funcionamiento es transformado en cine, reformándose también su fachada y pasando en el año 2000 a ser sede de la Cinemateca uruguaya. ;;
+COLON;Cerrito y Ciudadela;-34.90322668901268, -56.200882616059026;1910;1931;PRIVATE;Fue construido por impulso del filántropo Alejo Rossel y Rius, y  abrió sus puertas en  1910. De estilo neoclásico, constó con una platea en forma de herradura y balcones decorados. Junto con el Victoria Hall, fue sede de la Escuela Experimental de Arte Dramático creada en 1911;;
+LUMIERE ;Florida 1270;-34.905542626923115, -56.19971269067331;1910;1911;PRIVATE;"El Lumiere funcinió por 1910 ,fue escenario propicio para la comedia, la operta y la zarzuela. En 1912 pasa a denominarse ""Coliseo"" y más tarde, en 1918 "" Comedia""";;
+COLISEO FLORIDA;Florida 1270;-34.905542626923115, -56.19971269067331;1912;1917;PRIVATE;"El Lumiere funcinió por 1910 ,fue escenario propicio para la comedia, la operta y la zarzuela. En 1912 pasa a denominarse ""Coliseo"" y más tarde, en 1918 "" Comedia""";;
+de la COMEDIA ;Florida 1270;-34.905542626923115, -56.19971269067331;1918;1920;PRIVATE;"El Lumiere funcinió por 1910 ,fue escenario propicio para la comedia, la operta y la zarzuela. En 1912 pasa a denominarse ""Coliseo"" y más tarde, en 1918 "" Comedia""";;
+APOLO ;Grecia 3281;-34.892104500817865, -56.24799878946526;1915;1962;PRIVATE;"Inaugurada por Manuel Diz en la Villa del Cerro en el año 1915, esta sala fue hogar de espectáculos teatrales, proyecciones cinematográficas, conciertos, actos políticos, bailes, kermeses y otras actividades diversas.
+";;
+CATALUNYA ;Héctor Gutierrez Ruiz 1269 ;-34.90733530927489, -56.19128009377608;1918;1921;PRIVATE;"Construído por el Centro Catalá bajo la dirección del arquitecto catalán Purcalla Grau, fue inaugurado en 1918 y funcionó como espacio de encuentro para la comunidad catalana en Montevideo.
+";;
+ALBENIZ ;Héctor Gutierrez Ruiz 1269 ;-34.90733530927489, -56.19128009377609;1922;1937;PRIVATE;Inaugurado en 1922 el espacio donde funcionaba el Teatro Catalunya, albergó durante 1928 la “Casa del arte”. Fue transformado en cine a fines de los años treinta, al inicio del auge de las salas de cine en Montevideo.;;
+ZABALA;Av. 18 de Julio 994;-34.90612819367509, -56.194939016058896;1922;1923;PRIVATE;"Diseñado por el arquitecto francés Camille Gardelle bajo las órdenes de Arturo Heber Jackson, el Teatro Zabala dejó de funcionar tras algunos meses por las dificultades acústicas que generaba la cercanía a la avenida.
+";;
+ODEÓN ;Paysandú 767;-34.90239939367849, -56.19946598722287;1925;1965;PRIVATE ;"La antigua sala de conciertos del Conservatorio “La Lira” es acondicionada como teatro en 1925 y se convierte en el Teatro Odeón, sede del elenco “Teatro de la Ciudad de Montevideo” dirigido por Antonio Larreta.
+";;
+ATENEO POPULAR;Río Negro 1180;-34.909126535343965, -56.19307616062498;1931;;ALL;"Inaugurado en 1931 donde antes funcionaba el “Centro Internacional de Estudios Sociales”, el Ateneo Popular del Sindicato Único de la Aguja fue sede de conferencias y espacios de formación sindical además de sala teatral
+";;
+AUDITORIO DEL SODRE;Mercedes y Andes;-34.90436049445823, -56.19831607373153;1931;1971;PUBLIC ;El Auditorio se instaló en el teatro Urquiza, expropiado en 1931 y remodelado. Se realizaron funciones de teatro, de opéra y el festival Cine-Arte del SODRE. En 1971 fue destruido por un incendio. ;;
+TEATRO SOLÍS;Buenos Aires 678;-34.90789269809609, -56.201139789076464;1937;;PUBLIC ;"Inicialmente de gestión privada, es adquirido por la Intendencia de Montevideo en el año 1937 y en 1945 atraviesa una importante renovación. Desde 1947 alberga a la Comedia Nacional y desde 1958 a la Orquesta Filarmónica
+";;
+NOTARIADO;Guayabos 1729;-34.903486291657224, -56.17863943140409;1938;;ALL;"El Teatro del Notariado o Teatro de la Caja Notarial fue inaugurado en mayo de 1938 a iniciativa del Colegio de Escribanos del Uruguay. Su diseño, en estilo art déco, fue obra del arquitecto uruguayo Román Fresnedo Siri.
+";;
+SALA VERDI;Soriano 914;-34.90822289704118, -56.19643490256777;1946;;PUBLIC ;"El espacio que albergó al Instituto Verdi fue adquirido por el gobierno departamental en 1946, inicialmente con el objetivo de ofrecer espectáculos musicales. Tras varias reformas, se reinaugura en 1954 como sala teatral
+";;
+EL TINGLADO;Fernandez Crespo y Mercedes;-34.89971978979937, -56.176181087223036;1949;1958;INDEPENDENT;La Institución Teatral El Tinglado fue fundada el 30 de mayo de 1947. Tendrían su sala propia en 1949 a través de un comodato con la Intendencia de Montevideo. Fue demolido por la ampliación de la terminal de ómnibus.;;
+VICTORIA HALL;Río Negro 1477;-34.903419993753616, -56.19401428907679;1902;1956;PUBLIC ;Inaugurado el 14 de noviembre de 1902. El edificio fue construido por la colectividad británica en homenaje a la Reina Victoria. Obra del Arq. John Adams, el mismo que construyera las actuales Sala Verdi, la Escuela Municipal de Música y el edificio de London-Paris.;;
+ZHITLOVSKY / TEATRO ASTRAL;Durazno 1476;-34.90994304605922, -56.18346427597008;1950;;ALL;La sala teatral pertenece a la Asociación Cultural Israelita Dr. Jaime Zhitlovsky. Durante las décadas de 1950, 1960 y 1970 llegó a albergar actividades culturales y políticas promovidas por el Partido Comunista Uruguayo. Allí nació la murga Queso Magro en 1999.;;
+TEATRO DEL CORDÓN;18 de Julio y Magallanes;-34.90322761562802, -56.17920409814612;1950;1953;ALL;Ubicado a cielo abierto en la esquina S.E. del cruce de Magallanes con la Avenida 18 de Julio. La construcción del edificio que contiene el Cine Ópera implicó su desaparición.;;
+TEATRO DEL PUEBLO;San José y Yaguaron;-34.90638734121998, -56.187894789461865;1953;1955;INDEPENDENT;El colectivo Teatro del Pueblo nace el 22 de febrero de 1937 pero sin sala propia. ;;
+TEATRO EL GALPÓN;Mercedes y Roxlo;-34.90216229119376, -56.182320616059116;1951;1968;INDEPENDENT;Inaugurado el 4 de diciembre de 1951, en el que fuera un galpón en desuso, como sede del Instituto Teatral El Galpón que fuera fundado dos años antes.;;
+TEATRO VICTORIA;Río Negro 1477;-34.903419993753616, -56.19401428907679;1957;;INDEPENDENT   ;Sucedió al Victoria Hall. El BPS propietario del edificio lo cedió a los grupos de teatro independiente Teatro del Pueblo y Teatro Universitario recibiendo el nombre de Teatro Victoria. En 1974, Teatro del Pueblo fue desalojado.;;
+EL TINGLADO;Colonia y Martín C. Martínez;-34.89877798186486, -56.17131396817011;1958;;INDEPENDENT;Segunda sede de la Institución Teatral El Tinglado. La reforma edilicia se desarrolló entre 1960 y 1965, año en que se reinauguró. La sala ofrecía casi 200 localidades. Fue mejorada en 2007.;;
+FLORENCIO SANCHEZ;Grecia 3281;-34.892104500817865, -56.24799878946526;1962;;PUBLIC ;A raíz de la municipalización del Apolo este teatro fue rebautizado como Florencio Sánchez. En la década de 1990 sufrió una significativa reforma edilicia y fue reinaugurado en 1996. Tanto en el proceso de municipalización como en el de reforma se dio una fuerte participación del barrio.;;
+ASOCIACIÓN CRISTIANA DE JÓVENES;Colonia 1870;-34.9008922211104, -56.17645048946326;1962; ;ALL ;Un ejemplo de las salas teatrales perteneciente a instituciones culturales. Propiedad de la ACJ, una institución fundada en 1909. A fines del siglo XX era señalado como un teatro que presentaba actividades teatrales con regularidad. ;;
+CARLOS BRUSSA (ex-Odeon) ;Paysandú 767;-34.90239939367849, -56.19946598722287;1965;1996;ALL ;Comprado por la Sociedad Uruguay de Actores (SUA) en 1962 y posteriormente bautizado como Carlos Brussa. Cuando la SUA no pudo administrarlo fue alquilado al MEC hasta que sufrió un incendio el 2 de enero de 1996. ;;
+INSTITUTO CULTURAL ANGLO URUGUAYO - TEATRO ANGLO;San José 1426;-34.90659969877617, -56.184860273731545;1967;;PRIVATE;Otro caso de sala teatral de una una institución cultural. Inaugurada en 1967. Cuenta con más de 250 localidades. Posteriormente se habilitó una segunda sala, en el mismo edificio, de menores dimensiones.;;
+TEATRO EL GALPÓN;18 de Julio 1618;-34.90405109268587, -56.181071744895384;1969;;INDEPENDENT;En 1964 los integrantes de El Galpón compran este local, que fuera del Cine Grand Palace, para transformarlo en sala teatral. Pese a la crisis económica, las obras de reforma avanzan. Se inaugura el 9 de enero de 1969 con una capacidad para 650 espectadores.;;
+TEATRO DE VERANO;Canteras del Parque Rodó;-34.919723141260825, -56.16963966931476;1944;;PUBLIC ;;;
+Teatro de Barrio Malvín;Aconcagua y Amazonas;-34.89478317490973, -56.10095631605936;1945; ;LOCAL ;;;
+TEATRO DE VERANO DE VILLA COLÓN;;-34.80514866926225, -56.231444676103195;1946; ;LOCAL ;;;
+TEATRO DE VERANO DE CAPURRO;Accesos y Capurro;-34.872769175918144, -56.21451730692093;1946; ;LOCAL ;;;
+TEATRO DE VERANO DE MAROÑAS;;-34.85003577407398, -56.099057465224746;1947; ;LOCAL ;;;
+TEATRO BARRIAL TRES CRUCES;;-34.894108397079904, -56.166046823274634;1948; ;LOCAL ;;;
+TEATRO DE VERANO RAFFO;Millán y Raffo;-34.84219431827751, -56.2086749290384;1948; ;LOCAL ;;;
+TEATRO DE BARRIO LA CRIOLLA;Bayona y Trápani;-34.85360117130118, -56.18918064675104;1948; ;LOCAL ;;;
+TEATRO DE BARRIO DEL CERRO;Belgica entre Bogota y Rio de Janeiro ;-34.880204, -56.253970;1950;1982;LOCAL ;;;
+TEATRO DE BARRIO PASO DE LA ARENA;Avenida Alfredo Moreno Venditto;-34.83894031583139, -56.271322999999995;1955;1971;LOCAL ;;;
+TEATRO DE BARRIO RINCÓN DEL CERRO;Camino Cibils y Camino La Boyada;-34.86101350704035, -56.269867263290365;1952;;LOCAL ;;;

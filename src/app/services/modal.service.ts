@@ -15,6 +15,7 @@ export interface IModal {
     html?: SafeHtml;
     btnMore?: string;
     logos?: string[];
+    [key: string]: any;
   };
 }
 
@@ -28,11 +29,12 @@ export class ModalService {
   static buildModalContent(obj: any): IModal {
     return {
       content: {
+        ...obj,
         photo: obj.photo,
         title: obj.title,
         type: obj.type,
         description: obj.description,
-        btnMore: obj.btnMore,
+        btnMore: obj.link,
         logos: obj.logos
       }
     };

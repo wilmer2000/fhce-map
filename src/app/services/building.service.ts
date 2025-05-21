@@ -49,6 +49,7 @@ export class BuildingService {
     });
 
     this.setYearsLimits();
+
     this._buildings.next(this.getGeoJson(filteredBuildings));
   }
 
@@ -58,7 +59,7 @@ export class BuildingService {
   }
 
   setMarkerColor(mapIcon: EMapType): string {
-    return MAP_COLOR[mapIcon];
+    return MAP_COLOR[mapIcon] ?? MAP_COLOR[EMapType.All];
   }
 
   private getCsv(): void {
@@ -82,14 +83,18 @@ export class BuildingService {
     for (let i = 1; i < lines.length; i++) {
       const currentLine: string[] = lines[i].split(delimiter);
 
+      if (currentLine[0] === '' || currentLine[2] === '') continue;
+
       buildings.push({
-        name: currentLine[0].trim(),
-        address: currentLine[1].trim(),
-        coords: currentLine[2].trim(),
-        openYear: currentLine[3].trim(),
-        closeYear: currentLine[4].length ? currentLine[4].trim() : currentYear.toString(),
-        type: currentLine[5].trim(),
-        description: currentLine[6].trim(),
+        name: !!currentLine[0] ? currentLine[0].trim() : '',
+        address: !!currentLine[1] ? currentLine[1].trim() : '',
+        coords: !!currentLine[2] ? currentLine[2].trim() : '',
+        openYear: !!currentLine[3] ? currentLine[3].trim() : '',
+        closeYear: !!currentLine[4] ? currentLine[4].trim() : currentYear.toString(),
+        type: !!currentLine[5] ? currentLine[5].trim() : '',
+        description: !!currentLine[6] ? currentLine[6].trim() : '' ,
+        photo: !!currentLine[7] ? currentLine[7].trim() : '',
+        link: !!currentLine[8] ? currentLine[8].trim() : '',
       });
     }
 
@@ -107,12 +112,16 @@ export class BuildingService {
           coordinates: [parseFloat(building.coords.split(',')[1]), parseFloat(building.coords.split(',')[0])],
         },
         properties: {
+          ...building,
           name: building.name,
           address: building.address,
           openYear: +building.openYear,
           closeYear: +building.closeYear || currentYear,
           mapIconColor: this.setMarkerColor(building.type as EMapType),
           description: building.description,
+          photo: building.photo,
+          type: building.type,
+          link: building.link,
         },
       };
     });
