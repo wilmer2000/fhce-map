@@ -3,12 +3,13 @@ import { take } from 'rxjs';
 
 import { IModal, ModalService } from '../../services/modal.service';
 import { MapTypePipe } from '../../pipes/map-type.pipe';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
   templateUrl: './modal.component.html',
-  imports: [MapTypePipe],
+  imports: [MapTypePipe, TitleCasePipe],
 })
 export class ModalComponent implements OnInit {
   modalContent: IModal;

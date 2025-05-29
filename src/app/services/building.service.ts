@@ -13,12 +13,16 @@ export const YEARS_LIMIT = { startYear: 1900, endYear: 1960 };
 export class BuildingService {
   private readonly http = inject(HttpClient);
   private _buildingJsonBackup: IBuilding[] = [];
+
+  private _includeMovies: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private _buildings: BehaviorSubject<IGeoJson> = new BehaviorSubject<IGeoJson>({
     type: 'FeatureCollection',
     features: [],
     metadata: { startYear: 0, endYear: 0 },
   });
   buildings$ = this._buildings.asObservable();
+
   private stateMap: BehaviorSubject<IMapState> = new BehaviorSubject<IMapState>({
     filterType: EMapType.All,
     yearSelected: 1900,
@@ -32,10 +36,14 @@ export class BuildingService {
     this.getCsv();
   }
 
+  setIncludeMovies(includeMovies: boolean): void {
+    this._includeMovies.next(includeMovies);
+  }
+
   getBuildings(): void {
     const buildings: IBuilding[] = [...this._buildingJsonBackup];
-    const filter = this.stateMap.value.filterType;
     const yearSelected = this.stateMap.value.yearSelected;
+    const includeMovies = this._includeMovies.value;
 
     const filteredBuildings = buildings.filter((building: IBuilding) => {
       const closeYear = +building.closeYear;
@@ -43,7 +51,7 @@ export class BuildingService {
       const filterType = building.type;
 
       const isInYear = yearSelected >= openYear && yearSelected <= closeYear;
-      const isInType = filter === EMapType.All || filter === filterType;
+      const isInType = includeMovies ? true : filterType !== EMapType.Movie;
 
       return isInYear && isInType;
     });
@@ -92,7 +100,7 @@ export class BuildingService {
         openYear: !!currentLine[3] ? currentLine[3].trim() : '',
         closeYear: !!currentLine[4] ? currentLine[4].trim() : currentYear.toString(),
         type: !!currentLine[5] ? currentLine[5].trim() : '',
-        description: !!currentLine[6] ? currentLine[6].trim() : '' ,
+        description: !!currentLine[6] ? currentLine[6].trim() : '',
         photo: !!currentLine[7] ? currentLine[7].trim() : '',
         link: !!currentLine[8] ? currentLine[8].trim() : '',
       });

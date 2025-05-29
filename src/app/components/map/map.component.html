@@ -4,29 +4,28 @@
   </div>
   <div class="absolute left-0 top-0 z-10 w-full p-4">
     <div class="block h-full w-full rounded-2xl bg-white p-4 shadow-xl">
-      <div class="mb-4 flex justify-between items-center w-full">
+      <div class="mb-4 flex w-full items-center justify-between">
         <div class="flex-grow">
-          <div class="flex align-center justify-between sm:justify-start gap-6 sm:gap-4">
-            <h2 class="text-lg sm:text-2xl font-medium leading-none">Cartografía Teatral de Montevideo</h2>
+          <div class="align-center flex justify-between gap-6 sm:justify-start sm:gap-4">
+            <h2 class="text-lg font-medium leading-none sm:text-2xl">Cartografía Teatral de Montevideo</h2>
             <button (click)="openMoreInfoModal()" class="btn text-nowrap">Más info</button>
           </div>
         </div>
         @if (!isMobile()) {
           <div class="flex-grow-0">
             <ul class="flex gap-3">
-              <li class="self-center m-0"><img [height]="44" [ngSrc]="'/assets/logo-fche.svg'" [width]="134" alt=""></li>
-              <li class="self-center m-0"><img [height]="48" [ngSrc]="'/assets/logo-facultad.svg'" [width]="134" alt="">
-              </li>
-              <li class="self-center m-0"><img [height]="48" [ngSrc]="'/assets/logo-imm.svg'" [width]="134" alt=""></li>
+              <li class="m-0 self-center"><img [height]="44" [ngSrc]="'/assets/logo-fche.svg'" [width]="134" alt="" /></li>
+              <li class="m-0 self-center"><img [height]="48" [ngSrc]="'/assets/logo-facultad.svg'" [width]="134" alt="" /></li>
+              <li class="m-0 self-center"><img [height]="48" [ngSrc]="'/assets/logo-imm.svg'" [width]="134" alt="" /></li>
             </ul>
           </div>
         }
       </div>
       <div class="flex w-full gap-4">
-        <div class="flex-grow-0 w-[100px]">
-          <h3 class="flex h-full items-center text-3xl w-full">
+        <div class="w-[100px] flex-grow-0">
+          <h3 class="flex h-full w-full items-center text-3xl">
             <span class="me-2 text-xs">Año</span>
-            <span class="text-md  sm:text-[32px] font-medium">
+            <span class="text-md font-medium sm:text-[32px]">
               {{ mapState.yearSelected }}
             </span>
           </h3>
@@ -53,22 +52,36 @@
       </div>
     </div>
   </div>
-  <div class="absolute left-0 bottom-0 z-10 p-4">
+  <div class="absolute bottom-0 left-0 z-10 p-4">
     <div class="block rounded-2xl bg-white p-4 shadow-xl">
-      @for (list of mapTypes | keyvalue; track list.value) {
-        @if (list.value !== mapTypes.All) {
+      @let listTypes = [mapTypes.Private, mapTypes.Public, mapTypes.Independent, mapTypes.Associative, mapTypes.Local];
+
+      @for (type of listTypes; track type) {
+        @if (type !== mapTypes.All) {
           <div class="flex items-center">
             <div class="me-3">
-              <div class="rounded-full w-[12px] h-[12px] block"
-                   [ngStyle]="{ 'background': mapColors[list.value] }"></div>
+              <div class="block h-[12px] w-[12px] rounded-full" [ngStyle]="{ background: mapColors[type] }"></div>
             </div>
-            <div class="flex-grow">{{ list.value | mapType }}</div>
+            <div class="flex-grow">{{ type | mapType }}</div>
           </div>
         }
       }
+      <hr class="my-4">
+      @let typeMovie = mapTypes.Movie;
+      <div class="flex items-center">
+        <div class="me-3">
+          <div class="block h-[12px] w-[12px] rounded-full border-4 border-white" [ngStyle]="{ background: mapColors[typeMovie] }"></div>
+        </div>
+        <div class="flex-grow">
+          {{ typeMovie | mapType }}
+        </div>
+        <label class="inline-flex cursor-pointer items-center">
+          <input type="checkbox" value="" class="peer sr-only" (change)="refreshMap($event)" />
+          <div
+            class="peer relative h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-emerald-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-400 rtl:peer-checked:after:-translate-x-full"
+          ></div>
+        </label>
+      </div>
     </div>
   </div>
 </div>
-
-
-

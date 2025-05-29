@@ -14,7 +14,7 @@ export class MapTypePipe implements PipeTransform {
       case EMapType.Private:
         return 'Privados';
       case EMapType.Associative:
-        return 'Asociativos';
+        return 'Otros';
       case EMapType.Independent:
         return 'Independientes';
       case EMapType.Movie:

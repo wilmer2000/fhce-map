@@ -6,23 +6,25 @@ import { map, Subscription } from 'rxjs';
 
 import { EMapType, IGeoJson, IMapState } from '../../interfaces/building.interface';
 import { BuildingService } from '../../services/building.service';
-import { KeyValuePipe, NgOptimizedImage, NgStyle } from '@angular/common';
+import { NgOptimizedImage, NgStyle } from '@angular/common';
 import { MapTypePipe } from '../../pipes/map-type.pipe';
 import { IModal, ModalService } from '../../services/modal.service';
 import { MAP_COLOR, MAP_CONTAINER_ID, MAP_MVD_CENTER, MAP_ZOOM } from '../../constants/map.constant';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
-  imports: [KeyValuePipe, MapTypePipe, NgOptimizedImage, NgStyle],
+  imports: [MapTypePipe, NgOptimizedImage, NgStyle, FormsModule],
 })
 export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   mapState: IMapState;
-  readonly mapTypes = EMapType;
+
+  protected readonly mapTypes = EMapType;
   protected readonly mapColors = MAP_COLOR;
   protected readonly mapContainerId = MAP_CONTAINER_ID;
   private map: Map;
@@ -60,6 +62,15 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
     const inputElement = event.target as HTMLInputElement;
     const selectedYear = inputElement.value;
     const filter = { ...this.mapState, yearSelected: +selectedYear };
+    this.buildingService.setMapState(filter);
+    this.buildingService.getBuildings();
+  }
+
+  refreshMap(event: any): void {
+    const isChecked = event.target.checked;
+    const filter = { ...this.mapState };
+
+    this.buildingService.setIncludeMovies(isChecked);
     this.buildingService.setMapState(filter);
     this.buildingService.getBuildings();
   }

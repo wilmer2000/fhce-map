@@ -40,12 +40,12 @@ export interface IGeoJson {
 }
 
 export enum EMapType {
-  Private = 'PUBLIC',
-  Public = 'PRIVATE',
+  Private = 'PRIVATE',
+  Public = 'PUBLIC',
   Independent = 'INDEPENDENT',
-  Associative = 'ASSOCIATIVE',
+  Associative = 'ASSOCIATIVE', // Otros
   Movie = 'MOVIE',
-  Local = 'LOCAL',
+  Local = 'LOCAL', // Teatros de Barrios
   All = 'ALL',
 }
 
