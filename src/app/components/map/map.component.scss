@@ -10,7 +10,6 @@ $bg-color-slider: #c4c7c7;
 
 /*********** Baseline, reset styles ***********/
 .mark-years {
-  display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -30,7 +29,6 @@ $bg-color-slider: #c4c7c7;
   background: transparent;
   cursor: pointer;
   width: 100%;
-  margin-bottom: 5px;
 
   &:focus {
     outline: none;

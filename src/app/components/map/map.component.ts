@@ -119,10 +119,14 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.featureGroup = L.geoJSON(buildings, {
       pointToLayer(geoJsonPoint: geojson.Feature<geojson.Point, any>, latlng: LatLng): Layer {
+        const color = geoJsonPoint.properties.mapIconColor;
+        const type = geoJsonPoint.properties.type as EMapType;
+        const radius = type === EMapType.Movie ? 2 : 5;
+
         return new L.CircleMarker(latlng, {
-          radius: 5,
           fillOpacity: 1,
-          color: geoJsonPoint.properties.mapIconColor,
+          radius,
+          color
         });
       },
     }).bindTooltip(

@@ -30,18 +30,18 @@
             </span>
           </h3>
         </div>
-        <div class="flex-grow">
+        <div class="flex-grow self-center">
           <input
             (change)="onYearChange($event)"
             [max]="mapState.yearLimit.endYear"
             [min]="mapState.yearLimit.startYear"
-            class="input-range-selector"
+            class="input-range-selector mb-0 md:mb-1"
             id="year-selected"
             list="mark-years"
             name="year-selected"
             type="range"
           />
-          <datalist class="mark-years" id="mark-years">
+          <datalist class="mark-years hidden md:flex" id="mark-years">
             @if (mapState.steps) {
               @for (step of mapState.steps; track step) {
                 <option [label]="step" [value]="step">{{ step }}</option>
