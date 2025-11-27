@@ -81,7 +81,7 @@ export class BuildingService {
   }
 
   private parseCsvToJson(csvString: string): IBuilding[] {
-    const delimiter = ',';
+    const delimiter = ';';
     const lines = csvString.split('\n');
     const buildings: IBuilding[] = [];
     const currentYear = YEARS_LIMIT.endYear;
