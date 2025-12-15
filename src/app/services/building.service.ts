@@ -4,6 +4,7 @@ import { BehaviorSubject, take } from 'rxjs';
 
 import { EMapType, IBuilding, IGeoJson, IGeoJsonFeature, IMapState } from '../interfaces/building.interface';
 import { MAP_COLOR } from '../constants/map.constant';
+import { csvToJson } from '../utils/csv-to-json.util';
 
 export const YEARS_LIMIT = { startYear: 1900, endYear: 1960 };
 
@@ -13,16 +14,12 @@ export const YEARS_LIMIT = { startYear: 1900, endYear: 1960 };
 export class BuildingService {
   private readonly http = inject(HttpClient);
   private _buildingJsonBackup: IBuilding[] = [];
-
   private _includeMovies: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   private _buildings: BehaviorSubject<IGeoJson> = new BehaviorSubject<IGeoJson>({
     type: 'FeatureCollection',
     features: [],
     metadata: { startYear: 0, endYear: 0 },
   });
-  buildings$ = this._buildings.asObservable();
-
   private stateMap: BehaviorSubject<IMapState> = new BehaviorSubject<IMapState>({
     filterType: EMapType.All,
     yearSelected: 1900,
@@ -30,6 +27,8 @@ export class BuildingService {
     step: 10,
     steps: [],
   });
+
+  buildings$ = this._buildings.asObservable();
   stateMap$ = this.stateMap.asObservable();
 
   constructor() {
@@ -72,41 +71,15 @@ export class BuildingService {
 
   private getCsv(): void {
     this.http
-      .get<string>('/db.csv', { responseType: 'text' as 'json' })
+      .get<string>(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQG0y_A7a1Wr4zZ6hYDz0qMgFMQWJ0sM1k-Fm-eHrZd_JpfyIpnbiYulhZp85DLl9DFdEMCM4Jv16PX/pub?gid=1241625109&single=true&output=tsv',
+        { responseType: 'text' as 'json' }
+      )
       .pipe(take(1))
       .subscribe((csvString: string) => {
-        this._buildingJsonBackup = this.parseCsvToJson(csvString);
+        this._buildingJsonBackup = csvToJson(csvString);
         this.getBuildings();
       });
-  }
-
-  private parseCsvToJson(csvString: string): IBuilding[] {
-    const delimiter = ';';
-    const lines = csvString.split('\n');
-    const buildings: IBuilding[] = [];
-    const currentYear = YEARS_LIMIT.endYear;
-
-    if (lines[lines.length - 1] === '') lines.pop();
-
-    for (let i = 1; i < lines.length; i++) {
-      const currentLine: string[] = lines[i].split(delimiter);
-
-      if (currentLine[0] === '' || currentLine[2] === '') continue;
-
-      buildings.push({
-        name: !!currentLine[0] ? currentLine[0].trim() : '',
-        address: !!currentLine[1] ? currentLine[1].trim() : '',
-        coords: !!currentLine[2] ? currentLine[2].trim() : '',
-        openYear: !!currentLine[3] ? currentLine[3].trim() : '',
-        closeYear: !!currentLine[4] ? currentLine[4].trim() : currentYear.toString(),
-        type: !!currentLine[5] ? currentLine[5].trim() : '',
-        description: !!currentLine[6] ? currentLine[6].trim() : '',
-        photo: !!currentLine[7] ? currentLine[7].trim() : '',
-        link: !!currentLine[8] ? currentLine[8].trim() : '',
-      });
-    }
-
-    return buildings;
   }
 
   private getGeoJson(buildings: IBuilding[]): IGeoJson {

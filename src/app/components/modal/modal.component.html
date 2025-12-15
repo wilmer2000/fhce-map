@@ -7,7 +7,7 @@
         }
         <div class="flex-grow">
           @if (modalContent.content.photo) {
-            <img [src]="`/photos/${modalContent.content.photo}`" alt="Modal Image" class="h-auto w-full rounded-lg mb-5 aspect-auto shadow-lg" />
+            <img [src]="`/photos/${modalContent.content.photo.toLowerCase()}`" alt="Modal Image" class="h-auto w-full rounded-lg mb-5 aspect-auto shadow-lg" />
           }
           @if (modalContent.content.title) {
             <h3 class="text-4xl">{{ modalContent.content.title | titlecase }}</h3>
