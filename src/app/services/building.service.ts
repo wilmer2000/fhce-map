@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
 
 import { EMapType, IBuilding, IGeoJson, IGeoJsonFeature, IMapState } from '../interfaces/building.interface';
-import { MAP_COLOR } from '../constants/map.constant';
+import { MAP_COLOR, MAP_DB } from '../constants/map.constant';
 import { csvToJson } from '../utils/csv-to-json.util';
 
 export const YEARS_LIMIT = { startYear: 1900, endYear: 1960 };
@@ -43,17 +43,18 @@ export class BuildingService {
     const buildings: IBuilding[] = [...this._buildingJsonBackup];
     const yearSelected = this.stateMap.value.yearSelected;
     const includeMovies = this._includeMovies.value;
+    const currentYear = new Date().getFullYear();
+    const filteredBuildings = buildings
+      .filter((building: IBuilding) => {
+        const openYear = Number(building.openYear);
+        const closeYear = Number(building.closeYear) || currentYear;
 
-    const filteredBuildings = buildings.filter((building: IBuilding) => {
-      const closeYear = +building.closeYear;
-      const openYear = +building.openYear;
-      const filterType = building.type;
-
-      const isInYear = yearSelected >= openYear && yearSelected <= closeYear;
-      const isInType = includeMovies ? true : filterType !== EMapType.Movie;
-
-      return isInYear && isInType;
-    });
+        return yearSelected >= openYear && yearSelected <= closeYear;
+      })
+      .filter((building: IBuilding) => {
+        const filterType = building.type;
+        return includeMovies ? true : filterType !== EMapType.Movie;
+      });
 
     this.setYearsLimits();
 
@@ -71,10 +72,7 @@ export class BuildingService {
 
   private getCsv(): void {
     this.http
-      .get<string>(
-        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQG0y_A7a1Wr4zZ6hYDz0qMgFMQWJ0sM1k-Fm-eHrZd_JpfyIpnbiYulhZp85DLl9DFdEMCM4Jv16PX/pub?gid=1241625109&single=true&output=tsv',
-        { responseType: 'text' as 'json' }
-      )
+      .get<string>(MAP_DB, { responseType: 'text' as 'json' })
       .pipe(take(1))
       .subscribe((csvString: string) => {
         this._buildingJsonBackup = csvToJson(csvString);
@@ -83,41 +81,63 @@ export class BuildingService {
   }
 
   private getGeoJson(buildings: IBuilding[]): IGeoJson {
-    const list: IBuilding[] = buildings;
-    const currentYear: number = new Date().getFullYear();
-    const features: IGeoJsonFeature[] = list.map((building: IBuilding) => {
-      return {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [parseFloat(building.coords.split(',')[1]), parseFloat(building.coords.split(',')[0])],
-        },
-        properties: {
-          ...building,
-          name: building.name,
-          address: building.address,
-          openYear: +building.openYear,
-          closeYear: +building.closeYear || currentYear,
-          mapIconColor: this.setMarkerColor(building.type as EMapType),
-          description: building.description,
-          photo: building.photo,
-          type: building.type,
-          link: building.link,
-        },
-      };
-    });
+  const currentYear: number = new Date().getFullYear();
 
-    const startYear: number = Math.min(...features.map((feature: IGeoJsonFeature) => feature.properties.openYear));
+  const features: IGeoJsonFeature[] = buildings
+  .map((building: IBuilding): IGeoJsonFeature | null => {
+    const parts = building.coords.split(',').map((part) => part.trim());
+
+    if (parts.length !== 2) {
+      console.warn('Invalid building coordinates skipped:', building);
+      return null;
+    }
+
+    const [latRaw, lngRaw] = parts;
+    const lat = Number(latRaw);
+    const lng = Number(lngRaw);
+
+    if (
+      !Number.isFinite(lat) ||
+      !Number.isFinite(lng) ||
+      lat < -90 ||
+      lat > 90 ||
+      lng < -180 ||
+      lng > 180
+    ) {
+      console.warn('Invalid building coordinates skipped:', building);
+      return null;
+    }
+
+    const openYear = Number(building.openYear);
+    const closeYear = Number(building.closeYear);
 
     return {
-      type: 'FeatureCollection',
-      features,
-      metadata: {
-        startYear,
-        endYear: currentYear,
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [lng, lat],
+      },
+      properties: {
+        ...building,
+        openYear: Number.isFinite(openYear) ? openYear : null,
+        closeYear: Number.isFinite(closeYear) ? closeYear : currentYear,
+        mapIconColor: this.setMarkerColor(building.type as EMapType),
       },
     };
-  }
+  })
+  .filter((building): building is IGeoJsonFeature => building !== null);
+
+  const startYear: number = Math.min(...features.map((feature: IGeoJsonFeature) => feature.properties.openYear));
+
+  return {
+    type: 'FeatureCollection',
+    features,
+    metadata: {
+      startYear,
+      endYear: currentYear,
+    },
+  };
+}
 
   private setYearsLimits(yearsToDisplay = 13): void {
     const totalSteps = yearsToDisplay;
