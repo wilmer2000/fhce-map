@@ -81,63 +81,57 @@ export class BuildingService {
   }
 
   private getGeoJson(buildings: IBuilding[]): IGeoJson {
-  const currentYear: number = new Date().getFullYear();
+    const currentYear: number = new Date().getFullYear();
 
-  const features: IGeoJsonFeature[] = buildings
-  .map((building: IBuilding): IGeoJsonFeature | null => {
-    const parts = building.coords.split(',').map((part) => part.trim());
+    const features: IGeoJsonFeature[] = buildings
+      .map((building: IBuilding): IGeoJsonFeature | null => {
+        const parts = building.coords.split(',').map((part) => part.trim());
 
-    if (parts.length !== 2) {
-      console.warn('Invalid building coordinates skipped:', building);
-      return null;
-    }
+        if (parts.length !== 2) {
+          console.warn('Invalid building coordinates skipped:', building);
+          return null;
+        }
 
-    const [latRaw, lngRaw] = parts;
-    const lat = Number(latRaw);
-    const lng = Number(lngRaw);
+        const [latRaw, lngRaw] = parts;
+        const lat = Number(latRaw);
+        const lng = Number(lngRaw);
+        const cordValid = !Number.isFinite(lat) || !Number.isFinite(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180;
 
-    if (
-      !Number.isFinite(lat) ||
-      !Number.isFinite(lng) ||
-      lat < -90 ||
-      lat > 90 ||
-      lng < -180 ||
-      lng > 180
-    ) {
-      console.warn('Invalid building coordinates skipped:', building);
-      return null;
-    }
+        if (cordValid) {
+          console.warn('Invalid building coordinates skipped:', building);
+          return null;
+        }
 
-    const openYear = Number(building.openYear);
-    const closeYear = Number(building.closeYear);
+        const openYear = Number(building.openYear);
+        const closeYear = Number(building.closeYear);
+
+        return {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [lng, lat],
+          },
+          properties: {
+            ...building,
+            openYear: Number.isFinite(openYear) ? openYear : null,
+            closeYear: Number.isFinite(closeYear) ? closeYear : currentYear,
+            mapIconColor: this.setMarkerColor(building.type as EMapType),
+          },
+        };
+      })
+      .filter((building): building is IGeoJsonFeature => building !== null);
+
+    const startYear: number = Math.min(...features.map((feature: IGeoJsonFeature) => feature.properties.openYear));
 
     return {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [lng, lat],
-      },
-      properties: {
-        ...building,
-        openYear: Number.isFinite(openYear) ? openYear : null,
-        closeYear: Number.isFinite(closeYear) ? closeYear : currentYear,
-        mapIconColor: this.setMarkerColor(building.type as EMapType),
+      type: 'FeatureCollection',
+      features,
+      metadata: {
+        startYear,
+        endYear: currentYear,
       },
     };
-  })
-  .filter((building): building is IGeoJsonFeature => building !== null);
-
-  const startYear: number = Math.min(...features.map((feature: IGeoJsonFeature) => feature.properties.openYear));
-
-  return {
-    type: 'FeatureCollection',
-    features,
-    metadata: {
-      startYear,
-      endYear: currentYear,
-    },
-  };
-}
+  }
 
   private setYearsLimits(yearsToDisplay = 13): void {
     const totalSteps = yearsToDisplay;
