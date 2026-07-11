@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import * as geojson from 'geojson';
 import * as L from 'leaflet';
 import { GeoJSON, LatLng, Layer, LeafletMouseEvent, Map, Point } from 'leaflet';
@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MapTypePipe, NgOptimizedImage, NgStyle, FormsModule],
 })
 export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
@@ -126,7 +127,7 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
         return new L.CircleMarker(latlng, {
           fillOpacity: 1,
           radius,
-          color
+          color,
         });
       },
     }).bindTooltip(
